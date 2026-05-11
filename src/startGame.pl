@@ -88,21 +88,26 @@ startGame :-
     
     acakList(ListPemain, UrutanPemain),
     % print(UrutanPemain),
-    % printList(UrutanPemain),
-    % faktaSuksesor(UrutanPemain),
-    % jalanPertama(A),
+    write('Urutan pemain: '),
+    printList(UrutanPemain),!,
+    faktaSuksesor(UrutanPemain), nl,
+    jalanPertama(A),
     write('Setiap pemain mendapatkan 7 kartu acak.'), nl,
     write('Kartu discard top: '), topCard, nl,
     format('Giliran ~w.', [A]). 
 
     % random_card(ListPemain, Pemain, NewHand),
 
-printList([]).
+printList([H]) :- 
+    write(H), 
+    write('.').
 printList([H|T]):-
-    print(H), 
-    (\+T==[]->print('-')
-     ; print('.')),
+    T\=[],
+    write(H), 
+    write(' - '),
     printList(T).
+    
+    
 
 
 inputJumlah(Jumlah):-
@@ -113,22 +118,19 @@ inputJumlah(Jumlah):-
         Cobajumlah =< 4
     -> 
         Jumlah = Cobajumlah,
-        assertz(jumlahPemain(Jumlah))
-        
+        assertz(jumlahPemain(Jumlah))  
     ;
         write('Mohon masukkan angka antara 2-4.'),
         inputJumlah(Jumlah)
     ).
 
-
 inputNama(0, _, []).
-
 
 inputNama(N, Urut, Hasil) :-
     N > 0,
     % Pengurang is N - 1, 
     
-    format('Masukkan nama pemain ~w :', [Urut]), 
+    format('Masukkan nama pemain ~w : ', [Urut]), 
     read(Nama),
     (
         \+namaPemain(Nama)
@@ -147,8 +149,8 @@ inputNama(N, Urut, Hasil) :-
 
 faktaSuksesor([_]).
 faktaSuksesor([Awal, H|T]):-
-    suksesor(Awal, H),
-    faktaSuksesor([H, T]).
+    assertz(suksesor(Awal, H)),
+    faktaSuksesor([H|T]).
 
 
 acakList([], []).
