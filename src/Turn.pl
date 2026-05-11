@@ -9,14 +9,15 @@
 isStart(0).
 
 /* Predikat Umum */
-appendList([],[H],[H]).
-appendList([H|T],[X],[H|T1]) :-
-    appendList(T,[X],T1).
+appendList([],H,H).
+appendList([H|T],X,[H|T1]) :-
+    appendList(T,X,T1).
 
 /* Validasi Kartu */
 kartuValid(kartu(Warna,_), kartu(Warna,_)).
 kartuValid(kartu(_,Jenis), kartu(_,Jenis)).
 kartuValid(kartu(hitam,_),_).
+kartuValid(_,kartu(hitam,_)).
 
 /* Mekanisme pilih kartu */
 chooseCard(1, [Kartu|T], Kartu, T).
@@ -38,45 +39,60 @@ nextTurn :-
     format('~nGiliran ~w.~n', [NextPemain]).
 
 /* Mekanisme mainkanKartu */
+mainkanKartu(_) :-
+    isStart(0),!,
+    write('Permainan belum dimulai!'),
+    fail.
 mainkanKartu(Idx) :-
     isStart(1),
     giliran(Pemain),
     kartuPemain(Pemain,List),
     topKartu(Top),
+    chooseCard(Idx, List, Kartu, Sisa),!,
+    validasiTop(Kartu, Top),
+    retract(kartuPemain(Pemain,_)),
+    asserta(kartuPemain(Pemain, Sisa)),
+    retract(topKartu(_)),
+    asserta(topKartu(Kartu)),
+    format('~w memainkan kartu: ~w.~n', [Pemain,Kartu]),
+    nextTurn.
+mainkanKartu(_) :-
+    isStart(1),
+    write('Index tidak valid!'),
+    nl.
 
-    (chooseCard(Idx,List,Kartu,Sisa) ->
-        (kartuValid(Kartu,Top) ->
-            retract(kartuPemain(Pemain,List)),
-            asserta(kartuPemain(Pemain,Sisa)),
-            retract(topKartu(Top)),
-            asserta(topKartu(Kartu)),
-            format('~w memainkan kartu: ~w.~n', [Pemain,Kartu]),
-            nextTurn
-        ;
-            write('Kartu tidak valid untuk dimainkan, silakan pilih kartu lain atau ambilKartu.'),
-            nl
-        )
-    ;
-        write('Index tidak valid!')
-    ),!.
+validasiTop(Kartu, Top) :-
+    kartuValid(Kartu,Top),!.
+validasiTop(Kartu, Top) :-
+    write('Kartu yang dimainkan tidak valid!'),
+    fail.
+
 
 /* Mekanisme ambilKartu */
+ambilKartu :-
+    isStart(0),!,
+    write('Permainan belum dimulai!'),
+    fail.
 ambilKartu :-
     isStart(1),
     giliran(Pemain),
     kartuPemain(Pemain,List),
     deck(Deck),
-    (Deck = [Kartu|Sisa] ->
-        appendList(List, Kartu, List1),
-        retract(kartuPemain(Pemain,List)),
-        asserta(kartuPemain(Pemain,List1)),
-        retract(deck(Deck)),
-        asserta(deck(Sisa)),
-        format('~w mendapatkan kartu: ~w.~n', [Pemain,Kartu]),
-        nextTurn
-    ;
-        write('Tumpukan deck habis!'),nl
-    ),!.
+    Deck = [Kartu|Sisa],!,
+    appendList(List,[Kartu], List1),
+    retract(kartuPemain(Pemain,_)),
+    asserta(kartuPemain(Pemain,List1)),
+    retract(deck(_)),
+    asserta(deck(Sisa)),
+    format('~w mendapatkan kartu: ~w.~n', [Pemain,Kartu]),
+    nextTurn.
+ambilKartu :-
+    isStart(1),
+    write('Deck sudah habis!'),
+    nextTurn,
+    fail.
+
+
 
 /* Sampel 4 Pemain */
 startGame :-
@@ -106,3 +122,8 @@ startGame :-
     format('Giliran: ~w.~n', [Pemain]),
     write('Silakan tentukan aksi Anda!'),nl,
     !.
+
+exit :-
+    isStart(1),!,
+    retract(isStart(1)),
+    asserta(isStart(0)).
