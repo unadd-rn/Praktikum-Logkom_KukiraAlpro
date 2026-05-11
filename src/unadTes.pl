@@ -1,22 +1,19 @@
 % ini biar jalan aja
-giliran(alice).
-namaPemain1(alice).
-namaPemain2(bob).
-kartuPemain1([]).
-kartuPemain2([]).
-discard_top(kartu(merah, 5)).
-warnaAktif(merah).
-urutanPemain([alice, bob]).
-jumlahPemain(2).
+:- dynamic giliran/1.
+:- dynamic kartuPemain/2.
+:- dynamic topKartu/1.
+:- dynamic urutanPemain/1.
 
-namaPemain3(none).
-namaPemain4(none).
-kartuPemain3([]).
-kartuPemain4([]).
+giliran(aaa).
+urutanPemain([aaa, bbb]).
+topKartu(kartu(merah, 5)).
+
+kartuPemain(aaa, [kartu(merah,3), kartu(kuning,7), kartu(hitam,wild)]).
+kartuPemain(bbb, [kartu(biru,2), kartu(hijau,skip)]).
 
 lihatCommand :-
     writeln('!!!COMMANDS!!!'),
-    writeln('mainKartu(Index)'),
+    writeln('mainkanKartu(Index)'),
     writeln('ambilKartu'),
     writeln('tantang'),
     writeln('uni(Index)'),
@@ -30,7 +27,7 @@ lihatCommand :-
 
 lihatKartu :-
     giliran(N),
-    milik(N, K),
+    kartuPemain(N, K),
     writeln('kartu kamu:'),
     cetak(K, 1).
 
@@ -40,36 +37,18 @@ cetak([kartu(W,J)|T], N) :-
     N1 is N + 1,
     cetak(T, N1).
 
-milik(N, K) :- namaPemain1(N), kartuPemain1(K), !.
-milik(N, K) :- namaPemain2(N), kartuPemain2(K), !.
-milik(N, K) :- namaPemain3(N), kartuPemain3(K), !.
-milik(N, K) :- namaPemain4(N), kartuPemain4(K), !.
-
 cekInfo :-
-    discard_top(Atas),
-    warnaAktif(W),
+    topKartu(Atas),
     urutanPemain(U),
     format("kartu atas: ~w~n", [Atas]),
-    format("warna aktif: ~w~n", [W]),
     format("urutan: ~w~n", [U]),
-    writeln('kartu tiap pemain yey'),
-    jumlahPemain(N),
-    infoP(1, N).
+    writeln(' '),
+    writeln('kartu tiap pemain:'),
+    infoP(U).
 
-infoP(I, N) :- I > N, !.
-infoP(I, N) :-
-    milikI(I, Nama, K),
-    Nama \= none,
+infoP([]).
+infoP([Nama|T]) :-
+    kartuPemain(Nama, K),
     length(K, Jml),
     format("~w: ~w kartu~n", [Nama, Jml]),
-    I1 is I + 1,
-    infoP(I1, N).
-infoP(I, N) :-
-    milikI(I, none, _), !,
-    I1 is I + 1,
-    infoP(I1, N).
-
-milikI(1, N, K) :- namaPemain1(N), kartuPemain1(K).
-milikI(2, N, K) :- namaPemain2(N), kartuPemain2(K).
-milikI(3, N, K) :- namaPemain3(N), kartuPemain3(K).
-milikI(4, N, K) :- namaPemain4(N), kartuPemain4(K).
+    infoP(T).
