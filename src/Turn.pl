@@ -1,12 +1,4 @@
-:- include('Kartu.pl').
-:- dynamic(isStart/1). 
-:- dynamic(giliran/1).
-:- dynamic(kartuPemain/2).
-:- dynamic(topKartu/1).
-:- dynamic(urutanPemain/1).
-:- dynamic(deck/1).
 
-isStart(0).
 
 /* Predikat Umum */
 appendList([],H,H).
@@ -63,7 +55,7 @@ mainkanKartu(_) :-
 
 validasiTop(Kartu, Top) :-
     kartuValid(Kartu,Top),!.
-validasiTop(Kartu, Top) :-
+validasiTop(_Kartu,_Top) :-
     write('Kartu yang dimainkan tidak valid!'),
     fail.
 
@@ -76,14 +68,12 @@ ambilKartu :-
 ambilKartu :-
     isStart(1),
     giliran(Pemain),
-    kartuPemain(Pemain,List),
     deck(Deck),
-    Deck = [Kartu|Sisa],!,
+    kartuPemain(Pemain,List),
+    randomKartu(Deck, Kartu),
     appendList(List,[Kartu], List1),
     retract(kartuPemain(Pemain,_)),
     asserta(kartuPemain(Pemain,List1)),
-    retract(deck(_)),
-    asserta(deck(Sisa)),
     format('~w mendapatkan kartu: ~w.~n', [Pemain,Kartu]),
     nextTurn.
 ambilKartu :-
@@ -92,36 +82,6 @@ ambilKartu :-
     nextTurn,
     fail.
 
-
-
-/* Sampel 4 Pemain */
-startGame :-
-    isStart(0),
-    retractall(giliran(_)),
-    retractall(kartuPemain(_,_)),
-    retractall(topKartu(_)),
-    retractall(urutanPemain(_)),
-    retractall(deck(_)),
-    retractall(isStart(_)),
-
-    asserta(isStart(1)),
-    asserta(urutanPemain([fritz, prana, edbert, unad])),
-    asserta(giliran(fritz)),
-    asserta(topKartu(kartu(biru,6))),
-
-    asserta(kartuPemain(fritz, [kartu(merah,6), kartu(kuning,6), kartu(hijau,6)])),
-    asserta(kartuPemain(prana, [kartu(merah,7), kartu(kuning,8), kartu(hijau,9)])),
-    asserta(kartuPemain(edbert, [kartu(merah,1), kartu(kuning,2), kartu(hijau,3)])),
-    asserta(kartuPemain(unad, [kartu(merah,4), kartu(kuning,5), kartu(hijau,0)])),
-    asserta(deck([kartu(hitam,wildDrawFour), kartu(merah,skip), kartu(biru,drawTwo)])),
-
-    giliran(Pemain),
-    write('=========================================='),nl,
-    write(' Tes Turn 4 Pemain '),nl,
-    write('=========================================='),nl,
-    format('Giliran: ~w.~n', [Pemain]),
-    write('Silakan tentukan aksi Anda!'),nl,
-    !.
 
 exit :-
     isStart(1),!,
