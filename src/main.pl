@@ -12,6 +12,7 @@
 :- dynamic(giliran/1).
 :- dynamic(kartuPemain/2).
 :- dynamic(urutanPemain/1).
+:- dynamic(urutanAwal/1).
 :- dynamic(isStart/1). 
 :- dynamic(isSkip/1). 
 :- dynamic(isReverse/1). 
@@ -19,12 +20,14 @@
 :- dynamic(isDrawFour/1).
 :- dynamic(isWild/1).
 :- dynamic(arah/1).
+:- dynamic(warna/1).
+:- dynamic(jenis/1).
 
 isStart(0).
 isSkip(0).
 isReverse(0).
 isWild(0).
-isDrawTwo(1).
+isDrawTwo(0).
 isDrawFour(0).
 arah(kanan).
 

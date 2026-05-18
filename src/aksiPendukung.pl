@@ -28,7 +28,7 @@ cetak([kartu(W,J)|T], N) :-
 
 cekInfo :-
     topKartu(Atas),
-    urutanPemain(U),
+    urutanAwal(U),
     format("kartu atas: ~w~n", [Atas]),
     format("urutan: ~w~n", [U]),
     write(' '),nl,

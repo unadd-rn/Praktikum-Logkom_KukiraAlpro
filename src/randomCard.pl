@@ -26,15 +26,3 @@ bagiKePemain([Pemain|SisaPemain],Deck):-
     bagiNKartu(7,Deck,TanganPemain),
     assertz(kartuPemain(Pemain,TanganPemain)),
     bagiKePemain(SisaPemain,Deck).
-
-/*
-tesBagiKartu :-
-    retractall(tanganPemain(_,_)),
-    ListPemain=['Prana','Unad','Fritz'],
-    write('Daftar Pemain:'), write(ListPemain),nl,
-
-
-    bagiKePemain(ListPemain,JumlahKartu),nl,
-    cetakTanganPemain(ListPemain).
-
-*/
