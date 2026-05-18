@@ -1,6 +1,4 @@
 
-
-
 startGame :-
     isStart(0),
     retractall(namaPemain(_)),
@@ -11,6 +9,11 @@ startGame :-
     retractall(kartuPemain(_,_)),
     retractall(urutanPemain(_)),
     retractall(isStart(_)),
+    retractall(isDrawFour(_)),
+    retractall(isDrawTwo(_)),
+    retractall(isReverse(_)),
+    retractall(isSkip(_)),
+    retractall(isWild(_)),
     asserta(isStart(1)),
     inputJumlah(N),
     inputNama(N, 1, _NamaPemain),
@@ -22,6 +25,7 @@ startGame :-
     printList(UrutanPemain),!,
     faktaSuksesor(UrutanPemain), nl,
     asserta(urutanPemain(UrutanPemain)),
+    asserta(urutanAwal(UrutanPemain)),
     jalanPertama(A),
     asserta(giliran(A)),
     deck(Deck),
@@ -122,6 +126,8 @@ topCard:-
     randomKartu(Deck, kartu(Warna,Angka)),
     kartuBantingan(Warna, Angka), !,    
     assertz(topKartu(kartu(Warna,Angka))),
+    asserta(warna(Warna)),
+    asserta(jenis(Angka)),
     write(Warna), write('-'), write(Angka).
 topCard:-
     topCard.
