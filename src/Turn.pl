@@ -20,7 +20,21 @@ chooseCard(N, [H|T], Kartu, [H|T1]) :-
     chooseCard(N1, T, Kartu, T1).
 
 /* Mekanisme ganti giliran */
-nextTurn :-
+nextTurn:-
+    isSkip(1),!,
+    urutanPemain([H|T]),
+    appendList(T,[H], UrtanBaru),
+    retractall(urutanPemain(_)),
+    asserta(urutanPemain(UrtanBaru)),
+    UrtanBaru = [NextPemain|_],
+    retractall(giliran(_)),
+    asserta(giliran(NextPemain)),
+    format('~nGiliran ~w di-SKIP!~n', [NextPemain]),
+    retractall(isSkip(_)),
+    asserta(isSkip(0)),
+    nextTurn.
+nextTurn:-
+    isReverse(0),!,
     urutanPemain([H|T]),
     appendList(T,[H], UrtanBaru),
     retractall(urutanPemain(_)),
@@ -29,6 +43,16 @@ nextTurn :-
     retractall(giliran(_)),
     asserta(giliran(NextPemain)),
     format('~nGiliran ~w.~n', [NextPemain]).
+nextTurn:-
+    isReverse(1),
+    urutanPemain([H|T]),
+    appendList(T,[H], UrtanBaru),
+    reverseList(UrtanBaru,UrutanReverse),
+    retractall(urutanPemain(_)),
+    asserta(urutanPemain(UrutanReverse)),
+    retractall(isReverse(_)),
+    asserta(isReverse(0)),
+    nextTurn.
 
 /* Mekanisme mainkanKartu */
 mainkanKartu(_) :-
@@ -45,21 +69,32 @@ mainkanKartu(Idx) :-
     kartuPemain(Pemain,List),
     topKartu(Top),
     chooseCard(Idx, List, Kartu, Sisa),!,
-    validasiTop(Kartu, Top),
+    validasiTop(Kartu),
     retract(kartuPemain(Pemain,_)),
     asserta(kartuPemain(Pemain, Sisa)),
     retract(topKartu(_)),
     asserta(topKartu(Kartu)),
     format('~w memainkan kartu: ~w.~n', [Pemain,Kartu]),
+    topKartu(kartu(Warna,Jenis)),
+    retractall(warna(_)),
+    asserta(warna(Warna)),
+    retractall(jenis(_)),
+    asserta(jenis(Jenis)),
+    actionCard(Jenis),
     nextTurn.
 mainkanKartu(_) :-
     isStart(1),
     write('Index tidak valid!'),
     nl.
 
-validasiTop(Kartu, Top) :-
-    kartuValid(Kartu,Top),!.
-validasiTop(_Kartu,_Top) :-
+validasiTop(kartu(hitam,_)).
+validasiTop(kartu(Warna,_)) :-
+    warna(W),
+    Warna = W.
+validasiTop(kartu(_,Jenis)) :-
+    jenis(J),
+    Jenis = J.
+validasiTop(_Kartu) :-
     write('Kartu yang dimainkan tidak valid!'),
     fail.
 
@@ -73,19 +108,17 @@ ambilKartu :-
     isStart(1),
     isDrawTwo(1),!,
     giliran(Pemain),
+    format('~w harus mengambil 2 kartu!~n', [Pemain]),
     deck(Deck),
-    kartuPemain(Pemain,List),
-    randomKartu(Deck, Kartu),
-    appendList(List,[Kartu], List1),
-    retract(kartuPemain(Pemain,_)),
-    asserta(kartuPemain(Pemain,List1)),
-    randomKartu(Deck, Kartu),
-    appendList(List,[Kartu], List1),
-    retract(kartuPemain(Pemain,_)),
-    asserta(kartuPemain(Pemain,List1)),
+    kartuPemain(Pemain,Kartu),
+    bagiNKartu(2,Deck,Hasil),
+    appendList(Kartu,Hasil,NewKartu),
+    retractall(kartuPemain(Pemain,_)),
+    asserta(kartuPemain(Pemain,NewKartu)),
     retractall(isDrawTwo(_)),
     asserta(isDrawTwo(0)),
     nextTurn.
+
 ambilKartu :-
     isStart(1),
     giliran(Pemain),
@@ -97,14 +130,15 @@ ambilKartu :-
     asserta(kartuPemain(Pemain,List1)),
     format('~w mendapatkan kartu: ~w.~n', [Pemain,Kartu]),
     nextTurn.
-ambilKartu :-
-    isStart(1),
-    write('Deck sudah habis!'),
-    nextTurn,
-    fail.
 
 
 exit :-
     isStart(1),!,
     retract(isStart(1)),
     asserta(isStart(0)).
+
+reverseList([],[]).
+reverseList([H],[H]).
+reverseList([H|T],NewList) :-
+    reverseList(T,L1),
+    appendList(L1,[H],NewList).
