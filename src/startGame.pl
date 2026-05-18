@@ -19,10 +19,10 @@ startGame :-
     acakList(ListPemain, UrutanPemain),
     % print(UrutanPemain),
     write('Urutan pemain: '),
-    printList(UrutanPemain),!,
-    faktaSuksesor(UrutanPemain), nl,
+    printList(UrutanPemain),nl,!,
+    % faktaSuksesor(UrutanPemain), nl,
     asserta(urutanPemain(UrutanPemain)),
-    jalanPertama(A),
+    jalanPertama(UrutanPemain, A),
     asserta(giliran(A)),
     deck(Deck),
     bagiKePemain(UrutanPemain,Deck),
@@ -126,7 +126,5 @@ topCard:-
 topCard:-
     topCard.
 
-jalanPertama(A):-
-    suksesor(A,_),
-    \+suksesor(_, A).
+jalanPertama([H|T],H).
     
