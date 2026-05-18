@@ -19,13 +19,17 @@
 :- dynamic(isDrawFour/1).
 :- dynamic(isWild/1).
 :- dynamic(arah/1).
+:- dynamic(isDrawFour/1). 
+:- dynamic(bisaNonHitam/1). 
+
 
 isStart(0).
 isSkip(0).
 isReverse(0).
 isWild(0).
-isDrawTwo(1).
+isDrawTwo(0).
 isDrawFour(0).
+bisaNonHitam(0).
 arah(kanan).
 
 
