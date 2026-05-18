@@ -35,6 +35,10 @@ mainkanKartu(_) :-
     isStart(0),!,
     write('Permainan belum dimulai!'),
     fail.
+mainkanKartu(_) :-
+    isDrawTwo(1),!,
+    write('Kamu tidak bisa memainkan kartu pada giliran ini! Silakan gunakan command ambilKartu!'),
+    fail.
 mainkanKartu(Idx) :-
     isStart(1),
     giliran(Pemain),
@@ -65,6 +69,23 @@ ambilKartu :-
     isStart(0),!,
     write('Permainan belum dimulai!'),
     fail.
+ambilKartu :-
+    isStart(1),
+    isDrawTwo(1),!,
+    giliran(Pemain),
+    deck(Deck),
+    kartuPemain(Pemain,List),
+    randomKartu(Deck, Kartu),
+    appendList(List,[Kartu], List1),
+    retract(kartuPemain(Pemain,_)),
+    asserta(kartuPemain(Pemain,List1)),
+    randomKartu(Deck, Kartu),
+    appendList(List,[Kartu], List1),
+    retract(kartuPemain(Pemain,_)),
+    asserta(kartuPemain(Pemain,List1)),
+    retractall(isDrawTwo(_)),
+    asserta(isDrawTwo(0)),
+    nextTurn.
 ambilKartu :-
     isStart(1),
     giliran(Pemain),
