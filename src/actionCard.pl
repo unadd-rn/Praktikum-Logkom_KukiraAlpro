@@ -20,7 +20,9 @@ actionSkip.
 
 actionReverse.
 
-actionDrawTwo.
+actionDrawTwo :-
+    retractall(isDrawTwo(_)),
+    asserta(isDrawTwo(1)).
 
 actionWild.
 
