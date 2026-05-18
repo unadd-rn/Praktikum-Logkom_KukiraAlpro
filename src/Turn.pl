@@ -11,6 +11,23 @@ kartuValid(kartu(_,Jenis), kartu(_,Jenis)).
 kartuValid(kartu(hitam,_),_).
 kartuValid(_,kartu(hitam,_)).
 
+validasiListNonHitam([], _).
+
+validasiListNonHitam([H|T], Top):-
+    validasiNonHitam(H, Top),
+    validasiListNonHitam(T, Top).
+validasiNonHitam(kartu(Warna,_), kartu(Warna,_)):-
+    retractall(bisaNonHitam(_)),
+    asserta(bisaNonHitam(1)), !.
+validasiNonHitam(kartu(_,Jenis), kartu(_,Jenis)):-
+    retractall(bisaNonHitam(_)),
+    asserta(bisaNonHitam(1)), !.
+validasiNonHitam(kartu(_,_), kartu(_,_)).
+
+wilDrawFourKah(kartu(hitam, wildDrawFour)).
+    
+
+
 /* Mekanisme pilih kartu */
 chooseCard(1, [Kartu|T], Kartu, T).
 
@@ -36,6 +53,10 @@ mainkanKartu(_) :-
     write('Permainan belum dimulai!'),
     fail.
 mainkanKartu(_) :-
+    isDrawFour(1),!,
+    write('Kamu tidak bisa memainkan kartu pada giliran ini! Silakan gunakan command ambilKartu!'),
+    fail.
+mainkanKartu(_) :-
     isDrawTwo(1),!,
     write('Kamu tidak bisa memainkan kartu pada giliran ini! Silakan gunakan command ambilKartu!'),
     fail.
@@ -44,14 +65,35 @@ mainkanKartu(Idx) :-
     giliran(Pemain),
     kartuPemain(Pemain,List),
     topKartu(Top),
-    chooseCard(Idx, List, Kartu, Sisa),!,
+    chooseCard(Idx, List, Kartu, Sisa),
     validasiTop(Kartu, Top),
+    \+wilDrawFourKah(Kartu), !,
+    % validasiListNonHitam(List, Top),
     retract(kartuPemain(Pemain,_)),
     asserta(kartuPemain(Pemain, Sisa)),
     retract(topKartu(_)),
     asserta(topKartu(Kartu)),
-    format('~w memainkan kartu: ~w.~n', [Pemain,Kartu]),
+    % format('~w memainkan kartu: ~w.~n', [Pemain,Kartu]),
     nextTurn.
+
+mainkanKartu(Idx) :-
+    isStart(1),
+    giliran(Pemain),
+    kartuPemain(Pemain,List),
+    topKartu(Top),
+    chooseCard(Idx, List, Kartu, Sisa),
+    validasiTop(Kartu, Top),
+    wilDrawFourKah(Kartu), !,
+    validasiListNonHitam(List, Top),
+    retractall(isDrawFour(_)),
+    asserta(isDrawFour(1)),
+    retract(kartuPemain(Pemain,_)),
+    asserta(kartuPemain(Pemain, Sisa)),
+    retract(topKartu(_)),
+    asserta(topKartu(Kartu)),
+    % format('~w memainkan kartu: ~w.~n', [Pemain,Kartu]),
+    nextTurn.
+
 mainkanKartu(_) :-
     isStart(1),
     write('Index tidak valid!'),
@@ -63,12 +105,70 @@ validasiTop(_Kartu,_Top) :-
     write('Kartu yang dimainkan tidak valid!'),
     fail.
 
+tantang:-
+    isStart(1),
+    isDrawFour(1),!,
+    bisaNonHitam(1), %gak boleh, pemain sebelumnya kena 4
+    giliran(Pemain),
+    urutanPemain(T),
+    pemainSebelumnya(T, PemainSebelumnya),
+    write('Tantangan dilakukan!'), nl,
+    format('~nMemeriksa kartu ~w.~n', [PemainSebelumnya]), nl,
+    deck(Deck),
+    kartuPemain(PemainSebelumnya,List),
+    bagiNKartu(4, Deck, HasilDrawFour),
+    appendList(List, HasilDrawFour, ListBaru),
+    format('~nTantangan berhasil ~w mendapatkan 4 kartu. .~n', [PemainSebelumnya]), nl,
+    retract(kartuPemain(PemainSebelumnya,_)),
+    assertz(kartuPemain(PemainSebelumnya,ListBaru)),
+    retractall(isDrawFour(_)),
+    asserta(isDrawFour(0)),
+    nextTurn.
+
+tantang:-
+    isStart(1),
+    isDrawFour(1),!,
+    bisaNonHitam(0),
+    giliran(Pemain),
+    urutanPemain(T),
+    pemainSebelumnya(T, PemainSebelumnya),
+    write('Tantangan dilakukan!'),
+    format('~nMemeriksa kartu ~w.~n', [PemainSebelumnya]),
+    giliran(Pemain),
+    deck(Deck),
+    kartuPemain(Pemain,List),
+    bagiNKartu(6, Deck, HasilDrawFour),
+    appendList(List, HasilDrawFour, ListBaru),
+    format('~nTantangan berhasil ~w mendapatkan 6 kartu. .~n', [Pemain]), nl,
+    retract(kartuPemain(Pemain,_)),
+    assertz(kartuPemain(Pemain,ListBaru)),
+    retractall(isDrawFour(_)),
+    asserta(isDrawFour(0)),
+    nextTurn.
+        
+pemainSebelumnya([T], T).
+pemainSebelumnya([_|T], Last):-
+    last(T, Last).
 
 /* Mekanisme ambilKartu */
 ambilKartu :-
     isStart(0),!,
     write('Permainan belum dimulai!'),
     fail.
+
+ambilKartu :-
+    isStart(1),
+    isDrawFour(1),!,
+    giliran(Pemain),
+    deck(Deck),
+    kartuPemain(Pemain,List),
+    bagiNKartu(4, Deck, HasilDrawFour),
+    appendList(List, HasilDrawFour, ListBaru),
+    retractall(kartuPemain(Pemain,_)),
+    assertz(kartuPemain(Pemain,ListBaru)),
+    retractall(isDrawFour(_)),
+    asserta(isDrawFour(0)),
+    nextTurn.
 ambilKartu :-
     isStart(1),
     isDrawTwo(1),!,
