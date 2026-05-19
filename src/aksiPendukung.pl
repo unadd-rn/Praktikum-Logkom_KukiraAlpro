@@ -1,11 +1,49 @@
 
 
 lihatCommand :-
+    isStart(1),
+    write('!!!COMMANDS!!!'),nl,
+    write('mainkanKartu(Index)'),nl,
+    write('ambilKartu'),nl,
+    write('uni(Index)'),nl,
+    write('tangkap(Nama)'),nl,
+    write('lihatCommand'),nl,
+    write('lihatKartu'),nl,
+    write('cekInfo'),nl,
+    write('endGame'),nl,
+    write('saveGame'),nl,
+    write('loadGame'),nl.
+lihatCommand :-
+    isSkip(1),
+    isDrawTwo(1),
+    write('!!!COMMANDS!!!'),nl,
+    write('ambilKartu'),nl,
+    write('tangkap(Nama)'),nl,
+    write('lihatCommand'),nl,
+    write('lihatKartu'),nl,
+    write('cekInfo'),nl,
+    write('endGame'),nl,
+    write('saveGame'),nl,
+    write('loadGame'),nl.
+lihatCommand :-
+    isWild(1),
     write('!!!COMMANDS!!!'),nl,
     write('mainkanKartu(Index)'),nl,
     write('ambilKartu'),nl,
     write('tantang'),nl,
     write('uni(Index)'),nl,
+    write('tangkap(Nama)'),nl,
+    write('lihatCommand'),nl,
+    write('lihatKartu'),nl,
+    write('cekInfo'),nl,
+    write('endGame'),nl,
+    write('saveGame'),nl,
+    write('loadGame'),nl.
+lihatCommand :-
+    isDrawFour(1),
+    write('!!!COMMANDS!!!'),nl,
+    write('ambilKartu'),nl,
+    write('tantang'),nl,
     write('tangkap(Nama)'),nl,
     write('lihatCommand'),nl,
     write('lihatKartu'),nl,
