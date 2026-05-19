@@ -98,6 +98,70 @@ validasiTop(_Kartu) :-
     write('Kartu yang dimainkan tidak valid!'),
     fail.
 
+/* Mekanisme Uni */
+uni(Idx) :-
+    isStart(1),
+    giliran(Pemain),
+    kartuPemain(Pemain,List),
+    count_list(List,2),
+    chooseCard(Idx,List,Kartu,Sisa),!,
+    validasiTop(Kartu),
+    retract(kartuPemain(Pemain,_)),
+    asserta(kartuPemain(Pemain,Sisa)),
+    retract(topKartu(_)),
+    asserta(topKartu(Kartu)),
+    retractall(sudahUni(Pemain)),
+    assertz(sudahUni(Pemain)),
+    format('~w memainkan kartu: ~w.~n', [Pemain,Kartu]),
+    format('~w menyerukan UNI!~n',[Pemain]),nl,
+    nextTurn.
+
+uni(_) :-
+    isStart(1),
+    giliran(Pemain),
+    format('Gagal menyerukan UNI, ~w mendapatkan penalti 1 kartu.~n',[Pemain]),
+    kartuPemain(Pemain,List),
+    deck(Deck),
+    randomKartu(Deck,Penalti),
+    appendList(List,[Penalti],ListBaru),
+    retract(kartuPemain(Pemain,_)),
+    asserta(kartuPemain(Pemain,ListBaru)),
+    nextTurn.
+
+/* Mekanisme Tangkap*/
+tangkap(Target) :-
+    isStart(1),
+    namaPemain(Target),
+    kartuPemain(Target,List),
+    count_list(List,1),
+    \+sudahUni(Target),!,
+    format('~w tertangkap tidak menyerukan UNI.~n', [Target]),
+    format('~w mendapatkan 2 kartu penalti.~n',[Target]),
+
+    deck(Deck),
+    randomKartu(Deck,Kartu1),
+    randomKartu(Deck,Kartu2),
+    appendList(List,[Kartu1],Temp),
+    appendList(Temp,[Kartu2],ListBaru),
+
+    retract(kartuPemain(Target,_)),
+    asserta(kartuPemain(Target,ListBaru)),
+    retractall(sudahUni(Target)),
+    nextTurn.
+
+tangkap(_) :-
+    isStart(1),
+    giliran(Pemain),
+    format('Gagal melakukan tangkap, ~w mendapat penalti 1 kartu.~n', [Pemain]),
+
+    kartuPemain(Pemain,List),
+    deck(Deck),
+    randomKartu(Deck,Penalti),
+    appendList(List,[Penalti],ListBaru),
+
+    retract(kartuPemain(Pemain,_)),
+    asserta(kartuPemain(Pemain,ListBaru)),
+    nextTurn.
 
 /* Mekanisme ambilKartu */
 ambilKartu :-
