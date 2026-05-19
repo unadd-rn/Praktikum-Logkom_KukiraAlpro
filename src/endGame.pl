@@ -37,7 +37,7 @@ cetakScoreboard([], _).
 cetakScoreboard([Poin-Nama|T], Rank) :-
     format("~w. ~w - ~w poin~n", [Rank, Nama, Poin]),
     Rank1 is Rank + 1,
-    cetakRanking(T, Rank1).
+    cetakScoreboard(T, Rank1).
 
 endGame :-
     giliran(Pemenang),
@@ -45,5 +45,5 @@ endGame :-
     write('GAME OVER!!!'), nl,
     format("1. ~w - 0 poin~n", [Pemenang]),
     scoreBoard(U, Pemenang, ListPoin),
-    insertionSort(ListPoin, Terurut),
+    sorting(ListPoin, Terurut),
     cetakScoreboard(Terurut, 2).
