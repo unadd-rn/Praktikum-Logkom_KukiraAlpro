@@ -14,6 +14,7 @@ startGame :-
     retractall(isReverse(_)),
     retractall(isSkip(_)),
     retractall(isWild(_)),
+    retractall(sudahUni(_)),
     asserta(isDrawFour(0)),
     asserta(isDrawTwo(0)),
     asserta(isReverse(0)),

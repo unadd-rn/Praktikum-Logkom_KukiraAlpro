@@ -23,6 +23,7 @@
 :- dynamic(arah/1).
 :- dynamic(warna/1).
 :- dynamic(jenis/1).
+:- dynamic(sudahUni/1).
 
 isStart(0).
 isSkip(0).
