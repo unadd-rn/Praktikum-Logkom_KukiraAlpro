@@ -1,4 +1,6 @@
-
+% Ini aku tambahin soalnya takutnya if else ga bole
+coba(Goal) :- Goal, !.
+coba(_).
 
 /* Predikat Umum */
 appendList([],H,H).
@@ -193,7 +195,7 @@ ambilKartu :-
     retract(kartuPemain(Pemain,_)),
     asserta(kartuPemain(Pemain,List1)),
     format('~w mendapatkan kartu: ~w.~n', [Pemain,Kartu]),
-    nextTurn.
+    nextTurn. 
 
 
 exit :-
