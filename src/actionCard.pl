@@ -38,7 +38,16 @@ actionWild :-
     inputWarna.
 
 
-actionDrawFour.
+actionDrawFour :-
+    write('Silakan memilih warna merah/kuning/hijau/biru!'),
+    nl,
+    inputWarna,
+    giliran(Pemain),
+    kartuPemain(Pemain,Kartu),
+    topKartu(Top),
+    validasiListNonHitam(Kartu,Top),
+    retractall(isDrawFour(_)),
+    asserta(isDrawFour(1)).
 
 
 inputWarna:-
