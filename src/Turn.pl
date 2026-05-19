@@ -83,7 +83,8 @@ mainkanKartu(Idx) :-
     retractall(jenis(_)),
     asserta(jenis(Jenis)),
     actionCard(Jenis),
-    nextTurn.
+    nextTurn, 
+    coba(endGame).
 mainkanKartu(_) :-
     isStart(1),
     write('Index tidak valid!'),
@@ -119,7 +120,7 @@ ambilKartu :-
     asserta(kartuPemain(Pemain,NewKartu)),
     retractall(isDrawTwo(_)),
     asserta(isDrawTwo(0)),
-    nextTurn.
+    nextTurn. 
 
 ambilKartu :-
     isStart(1),
@@ -131,8 +132,8 @@ ambilKartu :-
     retract(kartuPemain(Pemain,_)),
     asserta(kartuPemain(Pemain,List1)),
     format('~w mendapatkan kartu: ~w.~n', [Pemain,Kartu]),
-    nextTurn. 
-
+    nextTurn,
+    coba(endGame). 
 
 exit :-
     isStart(1),!,

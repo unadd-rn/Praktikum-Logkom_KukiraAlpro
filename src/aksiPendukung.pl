@@ -2,6 +2,9 @@
 
 lihatCommand :-
     isStart(1),
+    isSkip(0),
+    isDrawTwo(0),
+    isDrawFour(0),
     write('!!!COMMANDS!!!'),nl,
     write('mainkanKartu(Index)'),nl,
     write('ambilKartu'),nl,
