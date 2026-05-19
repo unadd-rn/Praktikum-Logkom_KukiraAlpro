@@ -40,7 +40,7 @@ cetakScoreboard([Poin-Nama|T], Rank) :-
     cetakScoreboard(T, Rank1).
 
 endGame :-
-    kartuPemain(_, []),
+    % kartuPemain(_, []),
     giliran(Pemenang),
     urutanAwal(U),
     write('GAME OVER!!!'), nl,
