@@ -19,6 +19,7 @@
 :- dynamic(isReverse/1). 
 :- dynamic(isDrawTwo/1). 
 :- dynamic(isDrawFour/1).
+:- dynamic(bisaNonHitam/1).
 :- dynamic(isWild/1).
 :- dynamic(arah/1).
 :- dynamic(warna/1).
@@ -31,6 +32,7 @@ isReverse(0).
 isWild(0).
 isDrawTwo(0).
 isDrawFour(0).
+bisaNonHitam(0).
 arah(kanan).
 
 

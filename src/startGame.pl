@@ -8,6 +8,7 @@ startGame :-
     retractall(giliran(_)),
     retractall(kartuPemain(_,_)),
     retractall(urutanPemain(_)),
+    retractall(urutanAwal(_)),
     retractall(isStart(_)),
     retractall(isDrawFour(_)),
     retractall(isDrawTwo(_)),
@@ -27,11 +28,10 @@ startGame :-
     acakList(ListPemain, UrutanPemain),
     % print(UrutanPemain),
     write('Urutan pemain: '),
-    printList(UrutanPemain),!,
-    faktaSuksesor(UrutanPemain), nl,
+    printList(UrutanPemain),nl,!,
     asserta(urutanPemain(UrutanPemain)),
     asserta(urutanAwal(UrutanPemain)),
-    jalanPertama(A),
+    jalanPertama(UrutanPemain,A),
     asserta(giliran(A)),
     deck(Deck),
     bagiKePemain(UrutanPemain,Deck),
@@ -40,7 +40,6 @@ startGame :-
     topCard, nl,
     format('Giliran ~w.', [A]). 
 
-    % random_card(ListPemain, Pemain, NewHand),
 
 printList([H]) :- 
     write(H), 
@@ -137,7 +136,5 @@ topCard:-
 topCard:-
     topCard.
 
-jalanPertama(A):-
-    suksesor(A,_),
-    \+suksesor(_, A).
+jalanPertama([H|T],H).
     
