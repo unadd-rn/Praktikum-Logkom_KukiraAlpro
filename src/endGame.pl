@@ -44,6 +44,6 @@ endGame :-
     urutanAwal(U),
     write('GAME OVER!!!'), nl,
     format("1. ~w - 0 poin~n", [Pemenang]),
-    buatListPoin(U, Pemenang, ListPoin),
+    scoreBoard(U, Pemenang, ListPoin),
     insertionSort(ListPoin, Terurut),
-    cetakRanking(Terurut, 2).
+    cetakScoreboard(Terurut, 2).
