@@ -25,10 +25,9 @@ sorting([H|T], Bener) :-
     insertUrut(H, SisaBener, Bener).
 
 scoreBoard([], _, []).
-scoreBoard([Nama|T], Pemenang, Sisa) :-
-    Nama = Pemenang, !,
+scoreBoard([Pemenang|T], Pemenang, Sisa) :- !,
     scoreBoard(T, Pemenang, Sisa).
-scoreBoard([Nama|T], Pemenang, Sisa) :-
+scoreBoard([Nama|T], Pemenang, [Poin-Nama|Sisa]) :-
     kartuPemain(Nama, Kartu),
     hitungPoin(Kartu, Poin),
     scoreBoard(T, Pemenang, Sisa).
@@ -39,9 +38,12 @@ cetakScoreboard([Poin-Nama|T], Rank) :-
     Rank1 is Rank + 1,
     cetakScoreboard(T, Rank1).
 
+adaYangHabis :-
+    kartuPemain(_, []).
+
 endGame :-
-    % kartuPemain(_, []),
-    giliran(Pemenang),
+    adaYangHabis,
+    kartuPemain(Pemenang, []),
     urutanAwal(U),
     write('GAME OVER!!!'), nl,
     format("1. ~w - 0 poin~n", [Pemenang]),
