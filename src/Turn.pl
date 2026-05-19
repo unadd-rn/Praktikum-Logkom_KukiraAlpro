@@ -133,6 +133,12 @@ uni(_) :-
 /* Mekanisme Tangkap*/
 tangkap(Target) :-
     isStart(1),
+    giliran(Pemain),
+    Target == Pemain, !,
+    write('Tidak bisa menangkap diri sendiri.'),nl.
+
+tangkap(Target) :-
+    isStart(1),
     namaPemain(Target),
     kartuPemain(Target,List),
     count_list(List,1),
