@@ -168,7 +168,7 @@ tantang:-
         
 pemainSebelumnya([T], T).
 pemainSebelumnya([_|T], Last):-
-    Pemain(T,Last).
+    pemainSebelumnya(T,Last).
 
 /* Mekanisme ambilKartu */
 ambilKartu :-
