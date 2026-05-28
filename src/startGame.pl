@@ -7,6 +7,7 @@ startGame :-
     retractall(suksesor(_,_)),
     retractall(giliran(_)),
     retractall(kartuPemain(_,_)),
+    retractall(kartuTersembunyi(_,_)),
     retractall(urutanPemain(_)),
     retractall(urutanAwal(_)),
     retractall(isStart(_)),

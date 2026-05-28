@@ -25,4 +25,5 @@ bagiKePemain([],_).
 bagiKePemain([Pemain|SisaPemain],Deck):-
     bagiNKartu(7,Deck,TanganPemain),
     assertz(kartuPemain(Pemain,TanganPemain)),
+    assertz(kartuTersembunyi(Pemain,[])),
     bagiKePemain(SisaPemain,Deck).
