@@ -24,7 +24,7 @@ sembunyikanKartu(Idx) :-
     kartuPemain(Pemain,List),
     kartuTersembunyi(Pemain,Tersembunyi),
     count_list(List,X),
-    X>1!,
+    X>1,!,
     chooseCard(Idx, List, Kartu, Sisa),
     appendList(Tersembunyi,[Kartu],ListBaru),
     retractall(kartuTersembunyi(Pemain,_)),
