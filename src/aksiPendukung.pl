@@ -70,9 +70,9 @@ cekInfo :-
 infoP([]).
 infoP([Nama|T]) :-
     kartuPemain(Nama, K),
-    kartuTersembunyi(Nama, T),
+    kartuTersembunyi(Nama, S),
     length(K, X),
-    length(T, Y),
+    length(S, Y),
     Z is X-Y,
     format("~w: ~w kartu~n", [Nama, Z]),
     infoP(T).
