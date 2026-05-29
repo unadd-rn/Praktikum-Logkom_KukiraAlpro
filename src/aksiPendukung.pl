@@ -48,15 +48,15 @@ lihatKartu :-
 
 cetak([], _, _).
 cetak([kartu(W,J)|T], N, Pemain) :-
-    kartuPemain(Pemain,List),
+    kartuTersembunyi(Pemain,List),
     isInList(kartu(W,J),List),!,
     format("~w. ~w ~w (Tersembunyi)~n", [N, W, J]),
     N1 is N + 1,
-    cetak(T, N1).
+    cetak(T, N1, Pemain).
 cetak([kartu(W,J)|T], N, Pemain) :-
     format("~w. ~w ~w~n", [N, W, J]),
     N1 is N + 1,
-    cetak(T, N1).
+    cetak(T, N1, Pemain).
 
 cekInfo :-
     topKartu(Atas),
