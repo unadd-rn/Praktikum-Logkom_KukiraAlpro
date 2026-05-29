@@ -52,11 +52,6 @@ tampilkanKartu :-
 tampilkanKartu :-
     isStart(1),
     giliran(Pemain),
-    kartuPemain(Pemain,List),
-    kartuTersembunyi(Pemain,Tersembunyi),
-    appendList(List,Tersembunyi,ListBaru),
-    retractall(kartuPemain(Pemain,_)),
-    asserta(kartuPemain(Pemain,ListBaru)),
     retractall(kartuTersembunyi(Pemain,_)),
     asserta(kartuTersembunyi(Pemain,[])),
     format('Semua kartu tersembunyi ~w berhasil ditampilkan!~n', [Pemain]),
