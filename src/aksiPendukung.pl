@@ -71,8 +71,14 @@ infoP([]).
 infoP([Nama|T]) :-
     kartuPemain(Nama, K),
     kartuTersembunyi(Nama, S),
-    length(K, X),
-    length(S, Y),
+    lengthList(K, X),
+    lengthList(S, Y),
     Z is X-Y,
     format("~w: ~w kartu~n", [Nama, Z]),
     infoP(T).
+
+lengthList([],0).
+lengthList([H],1).
+lengthList([H|T],N) :-
+    lengthList(T,N1),
+    N is N1+1.
