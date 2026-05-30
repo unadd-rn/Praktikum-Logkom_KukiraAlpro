@@ -15,7 +15,7 @@ lihatCommand :-
     write('cekInfo'),nl,
     write('endGame'),nl,
     write('saveGame'),nl,
-    write('loadGame'),nl.
+    write('loadGame (perintah ini hanya bisa dilakukan saat game belum dimulai)'),nl.
 lihatCommand :-
     (isSkip(1) ; isDrawTwo(1)),
     write('!!!COMMANDS!!!'),nl,
@@ -24,9 +24,7 @@ lihatCommand :-
     write('lihatCommand'),nl,
     write('lihatKartu'),nl,
     write('cekInfo'),nl,
-    write('endGame'),nl,
-    write('saveGame'),nl,
-    write('loadGame'),nl.
+    write('endGame'),nl. 
 lihatCommand :-
     isDrawFour(1),
     write('!!!COMMANDS!!!'),nl,
@@ -36,9 +34,7 @@ lihatCommand :-
     write('lihatCommand'),nl,
     write('lihatKartu'),nl,
     write('cekInfo'),nl,
-    write('endGame'),nl,
-    write('saveGame'),nl,
-    write('loadGame'),nl.
+    write('endGame'),nl. 
 
 lihatKartu :-
     giliran(N),
