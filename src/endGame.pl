@@ -1,4 +1,5 @@
-nilaiKartu(kartu(_, J), N) :- number(J), N is J.
+nilaiKartu(kartu(_, 0), 1).
+nilaiKartu(kartu(_, J), N) :- isNumber(J),!, N is J.
 nilaiKartu(kartu(_, skip), 10).
 nilaiKartu(kartu(_, reverse), 10).
 nilaiKartu(kartu(_, drawTwo), 10).
@@ -49,4 +50,16 @@ endGame :-
     format("1. ~w - 0 poin~n", [Pemenang]),
     scoreBoard(U, Pemenang, ListPoin),
     sorting(ListPoin, Terurut),
-    cetakScoreboard(Terurut, 2).
+    cetakScoreboard(Terurut, 2),
+    retractall(isStart(_)),
+    asserta(isStart(0)).
+
+isNumber(1).
+isNumber(2).
+isNumber(3).
+isNumber(4).
+isNumber(5).
+isNumber(6).
+isNumber(7).
+isNumber(8).
+isNumber(9).
