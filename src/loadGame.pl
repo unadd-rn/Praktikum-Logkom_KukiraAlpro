@@ -1,30 +1,25 @@
 loadGame :-
     write('Nama file: '), read(In),
     bikinNama(In, File),
-    
-    catch((
-        open(File, read, S),
-        
-        %reset total
-        retractall(urutanPemain(_)),
-        retractall(giliran(_)),
-        retractall(topKartu(_)),
-        retractall(warna(_)),
-        retractall(arah(_)),
-        retractall(sudahUni(_)),
-        retractall(kartuPemain(_,_)),
-        retractall(isStart(_)),
-        
-        bacaFile(S),
-        close(S),
-        
-        asserta(isStart(1)),
-        format("Game dimuat dari ~w.~n", [File]),
-        giliran(G),
-        format("Giliran ~w.~n", [G])
-    ), _, (
-        write('File tidak ditemukan!'), nl
-    )).
+    eksekusiLoad(File).
+
+eksekusiLoad(File) :-
+    open(File, read, S), !,
+    retractall(urutanPemain(_)),
+    retractall(giliran(_)),
+    retractall(topKartu(_)),
+    retractall(warna(_)),
+    retractall(arah(_)),
+    retractall(sudahUni(_)),
+    retractall(kartuPemain(_,_)),
+    retractall(isStart(_)),
+    bacaFile(S),
+    close(S),
+    asserta(isStart(1)),
+    format("Game dimuat dari ~w.~n", [File]),
+    cekSelesai.
+eksekusiLoad(_) :-
+    write('Gagal memuat file! Pastikan nama file benar dan ada di direktori.'), nl.
 
 bacaFile(S) :-
     read(S, Term),
@@ -54,3 +49,12 @@ isiUni([P|T]) :-
 setKartu([], []).
 setKartu([W-J|T], [kartu(W,J)|R]) :-
     setKartu(T, R).
+
+cekSelesai :-
+    adaYangHabis, !,
+    endGame,
+    retractall(isStart(_)),
+    asserta(isStart(0)).
+cekSelesai :-
+    giliran(G),
+    format("Melanjutkan giliran ~w.~n", [G]).
