@@ -5,14 +5,10 @@
 :- include('startGame.pl').
 :- include('actionCard.pl').
 :- include('endGame.pl').
-<<<<<<< HEAD
 :- include('saveGame.pl').
 :- include('loadGame.pl').
 :- include('kartuTersembunyi.pl').
-
-=======
 :- include('godsHand.pl').
->>>>>>> branch/edbert
 
 :- dynamic(namaPemain/1).
 :- dynamic(jumlahPemain/1).
