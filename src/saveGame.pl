@@ -54,7 +54,7 @@ saveGame :-
     
     write(S, 'selesai.'), nl(S),
     close(S),
-    format("Game disimpan di ~w.~n", [File]).
+    format("Game disimpan di ~w.~n", [File]),
     retractall(isStart(_)),
     asserta(isStart(0)),
     write('Permainan dihentikan. Gunakan loadGame untuk melanjutkan nanti.'), nl.
