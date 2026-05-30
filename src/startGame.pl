@@ -1,6 +1,6 @@
 
 startGame :-
-    isStart(0),
+    isStart(0), 
     retractall(namaPemain(_)),
     retractall(jumlahPemain(_)),
     retractall(topKartu(_)),
