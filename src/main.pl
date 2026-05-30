@@ -5,6 +5,7 @@
 :- include('startGame.pl').
 :- include('actionCard.pl').
 :- include('endGame.pl').
+:- include('godsHand.pl').
 
 :- dynamic(namaPemain/1).
 :- dynamic(jumlahPemain/1).
