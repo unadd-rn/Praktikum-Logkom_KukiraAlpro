@@ -7,7 +7,7 @@ loadGame :-
 loadGame :-
     isStart(1), !,
     write('Gagal! Kamu tidak bisa load game saat permainan sedang berjalan!'), nl,
-    write('Selesaikan game terlebih dahulu atau gunakan command exit.'), nl.
+    write('Selesaikan game terlebih dahulu.'), nl.
 
 eksekusiLoad(File) :-
     file_exists(File), !,
@@ -30,7 +30,7 @@ eksekusiLoad(File) :-
     format("Game dimuat dari ~w.~n", [File]),
     cekSelesai.
 eksekusiLoad(_) :-
-    write('Gagal memuat file! Pastikan nama file benar dan ada di direktori.'), nl.
+    write('Gagal memuat file! Pastikan nama file benar dan ada.'), nl.
 
 bacaFile(S) :-
     read(S, Term),
@@ -43,12 +43,20 @@ bacaRekuren(S, Term) :-
     read(S, Next),
     bacaRekuren(S, Next).
 
-prosesTerm(urutanPemain:U) :- asserta(urutanPemain(U)), asserta(urutanAwal(U)).
-prosesTerm(giliran:G) :- asserta(giliran(G)).
-prosesTerm(warnaAktif:W) :- asserta(warna(W)).
-prosesTerm(arahPermainan:A) :- asserta(arah(A)).
-prosesTerm(statusUNI:L) :- isiUni(L).
-prosesTerm(discardTop:W-J) :- asserta(topKartu(kartu(W,J))), asserta(jenis(J)).
+prosesTerm(urutanPemain:U) :- 
+    asserta(urutanPemain(U)), 
+    asserta(urutanAwal(U)).
+prosesTerm(giliran:G) :- 
+    asserta(giliran(G)).
+prosesTerm(warnaAktif:W) :- 
+    asserta(warna(W)).
+prosesTerm(arahPermainan:A) :- 
+    asserta(arah(A)).
+prosesTerm(statusUNI:L) :- 
+    isiUni(L).
+prosesTerm(discardTop:W-J) :- 
+    asserta(topKartu(kartu(W,J))), 
+    asserta(jenis(J)).
 prosesTerm(kartu(P):L) :-
     setKartu(L, K),
     assertz(kartuPemain(P, K)).

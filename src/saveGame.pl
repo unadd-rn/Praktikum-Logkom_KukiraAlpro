@@ -31,7 +31,6 @@ saveGame :-
     
     write('Nama file: '), read(In),
     bikinNama(In, File),
-    
     open(File, write, S),
     
     urutanAwal(U),
@@ -42,12 +41,10 @@ saveGame :-
     
     format(S, "urutanPemain:~w.~n", [U]),
     format(S, "giliran:'~w'.~n", [G]),
-    
     Top = kartu(WTop, JTop),
     format(S, "discardTop:~w-~w.~n", [WTop, JTop]),
     format(S, "warnaAktif:~w.~n", [W]),
     format(S, "arahPermainan:~w.~n", [A]),
-    
     cekUni(U, LUni),
     format(S, "statusUNI:~w.~n", [LUni]),
     
