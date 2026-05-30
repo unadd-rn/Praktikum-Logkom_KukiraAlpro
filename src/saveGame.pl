@@ -16,6 +16,7 @@ tulisKartu(S, [P|T]) :-
     kartuPemain(P, K),
     ubahKartu(K, Teks),
     format(S, "kartu('~w'):~w.~n", [P, Teks]),
+    tulisKartuTersembunyi(S,P),
     tulisKartu(S, T).
 
 ubahKartu([], []).
@@ -64,3 +65,11 @@ saveGame :-
     write('Tidak bisa save saat ini!'), nl.
 saveGame :-
     write('Game belum mulai!'), nl.
+
+tulisKartuTersembunyi(S,P) :-
+    kartuTersembunyi(P,K),!,
+    ubahKartu(K,Teks),
+    format(S, "kartuTersembunyi('~w'):~w.~n", [P, Teks]).
+tulisKartuTersembunyi(S,P) :-
+    ubahKartu([], Teks),
+    format(S, "kartuTersembunyi('~w'):~w.~n", [P, Teks]).

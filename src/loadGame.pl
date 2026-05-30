@@ -21,6 +21,7 @@ eksekusiLoad(File) :-
     retractall(arah(_)),
     retractall(sudahUni(_)),
     retractall(kartuPemain(_,_)),
+    retractall(kartuTersembunyi(_,_)),
     retractall(isStart(_)),
 
     bacaFile(S),
@@ -51,6 +52,9 @@ prosesTerm(discardTop:W-J) :- asserta(topKartu(kartu(W,J))), asserta(jenis(J)).
 prosesTerm(kartu(P):L) :-
     setKartu(L, K),
     assertz(kartuPemain(P, K)).
+prosesTerm(kartuTersembunyi(P):L) :-
+    setKartu(L,K),
+    assertz(kartuTersembunyi(P, K)).
 prosesTerm(_).
 
 isiUni([]).
