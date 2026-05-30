@@ -14,7 +14,7 @@ godsHand :-
     godsHandChance(Angka).
 
 godsHandChance(Angka) :-
-    Angka =< 15,!,
+    Angka =< 20,!,
     jalankanGodsHand,
     selesaiGodsHand.
 
