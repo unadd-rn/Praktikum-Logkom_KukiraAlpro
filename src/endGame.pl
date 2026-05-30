@@ -49,4 +49,6 @@ endGame :-
     format("1. ~w - 0 poin~n", [Pemenang]),
     scoreBoard(U, Pemenang, ListPoin),
     sorting(ListPoin, Terurut),
-    cetakScoreboard(Terurut, 2).
+    cetakScoreboard(Terurut, 2),
+    retractall(isStart(_)),
+    asserta(isStart(0)).
