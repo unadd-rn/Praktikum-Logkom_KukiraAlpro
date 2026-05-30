@@ -34,7 +34,7 @@ saveGame :-
     
     open(File, write, S),
     
-    urutanPemain(U),
+    urutanAwal(U),
     giliran(G),
     topKartu(Top),
     warna(W),

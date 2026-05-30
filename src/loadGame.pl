@@ -10,7 +10,7 @@ loadGame :-
     write('Selesaikan game terlebih dahulu atau gunakan command endGame.'), nl.
 
 eksekusiLoad(File) :-
-    exists_file(File), !,
+    file_exists(File), !,
     open(File, read, S), !,
 
     retractall(urutanPemain(_)),
