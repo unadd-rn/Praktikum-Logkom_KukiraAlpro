@@ -2,7 +2,7 @@ bikinNama(In, Out) :-
     name(In, L1),
     name('.txt', L2),
     appendList(L1, L2, L3),
-    name(Out, L3).
+    name(Out, L3), !.
 
 cekUni([], []).
 cekUni([P|T], [P|R]) :-

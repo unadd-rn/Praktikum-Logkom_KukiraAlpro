@@ -4,8 +4,11 @@ loadGame :-
     eksekusiLoad(File).
 
 eksekusiLoad(File) :-
+    exists_file(File), !,
     open(File, read, S), !,
+
     retractall(urutanPemain(_)),
+    retractall(urutanAwal(_)),
     retractall(giliran(_)),
     retractall(topKartu(_)),
     retractall(warna(_)),
@@ -13,8 +16,9 @@ eksekusiLoad(File) :-
     retractall(sudahUni(_)),
     retractall(kartuPemain(_,_)),
     retractall(isStart(_)),
+
     bacaFile(S),
-    close(S),
+    close(S), !,
     asserta(isStart(1)),
     format("Game dimuat dari ~w.~n", [File]),
     cekSelesai.
@@ -26,6 +30,7 @@ bacaFile(S) :-
     bacaRekuren(S, Term).
 
 bacaRekuren(_, selesai) :- !.
+bacaRekuren(_, end_of_file) :- !.
 bacaRekuren(S, Term) :-
     prosesTerm(Term),
     read(S, Next),
@@ -40,6 +45,7 @@ prosesTerm(discardTop:W-J) :- asserta(topKartu(kartu(W,J))), asserta(jenis(J)).
 prosesTerm(kartu(P):L) :-
     setKartu(L, K),
     assertz(kartuPemain(P, K)).
+prosesTerm(_).
 
 isiUni([]).
 isiUni([P|T]) :- 
