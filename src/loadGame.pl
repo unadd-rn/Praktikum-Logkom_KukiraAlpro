@@ -1,7 +1,13 @@
 loadGame :-
+    isStart(0), !,
     write('Nama file: '), read(In),
     bikinNama(In, File),
     eksekusiLoad(File).
+
+loadGame :-
+    isStart(1), !,
+    write('Gagal! Kamu tidak bisa load game saat permainan sedang berjalan!'), nl,
+    write('Selesaikan game terlebih dahulu atau gunakan command endGame.'), nl.
 
 eksekusiLoad(File) :-
     exists_file(File), !,
