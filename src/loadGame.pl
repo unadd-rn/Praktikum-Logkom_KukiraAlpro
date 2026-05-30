@@ -36,7 +36,7 @@ bacaRekuren(S, Term) :-
     read(S, Next),
     bacaRekuren(S, Next).
 
-prosesTerm(urutan_pemain:U) :- asserta(urutanPemain(U)).
+prosesTerm(urutan_pemain:U) :- asserta(urutanPemain(U)), asserta(urutanAwal(U)).
 prosesTerm(giliran:G) :- asserta(giliran(G)).
 prosesTerm(warna_aktif:W) :- asserta(warna(W)).
 prosesTerm(arah_permainan:A) :- asserta(arah(A)).
