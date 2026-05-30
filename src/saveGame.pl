@@ -39,7 +39,7 @@ saveGame :-
     warna(W),
     arah(A),
     
-    format(S, "urutan pemain:~w.~n", [U]),
+    format(S, "urutanPemain:~w.~n", [U]),
     format(S, "giliran:'~w'.~n", [G]),
     
     Top = kartu(WTop, JTop),
