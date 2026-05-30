@@ -24,8 +24,7 @@ lihatCommand :-
     write('lihatCommand'),nl,
     write('lihatKartu'),nl,
     write('cekInfo'),nl,
-    write('endGame'),nl,
-    write('saveGame'),nl.
+    write('endGame'),nl. 
 lihatCommand :-
     isDrawFour(1),
     write('!!!COMMANDS!!!'),nl,
@@ -35,8 +34,7 @@ lihatCommand :-
     write('lihatCommand'),nl,
     write('lihatKartu'),nl,
     write('cekInfo'),nl,
-    write('endGame'),nl,
-    write('saveGame'),nl. 
+    write('endGame'),nl. 
 
 lihatKartu :-
     giliran(N),
