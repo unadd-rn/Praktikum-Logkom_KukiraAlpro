@@ -3,25 +3,32 @@ godsHand :-
     write('Permainan belum dimulai!'),nl.
 
 godsHand :-
-    isStart(1),!,
+    isStart(1),
+    urutanAwal(Urutan),
+    semua1Kartu(Urutan),!,
+    write('Gods hand gagal karena seluruh pemain hanya memiliki 1 kartu.'),nl.
+
+godsHand :-
+    isStart(1),
     random(1,101,Angka),
     godsHandChance(Angka).
 
 godsHandChance(Angka) :-
-    Angka =< 20, !, 
+    Angka =< 15,!,
     jalankanGodsHand,
-    nextTurn.
+    selesaiGodsHand.
 
 godsHandChance(Angka) :-
     Angka > 20, !,
     write('Tuhan belum berkehendak.'),nl,
     nextTurn.
 
-jalankanGodsHand :-
-    urutanAwal(Urutan),
-    listPemberi(Urutan,ListPemberi),
-    listKosong(ListPemberi), !,
-    write('Gods hand gagal karena tidak ada pemain yang memiliki lebih dari 1 kartu.'),nl.
+selesaiGodsHand :-
+    adaYangHabis, !,
+    endGame.
+
+selesaiGodsHand :-
+    nextTurn.
 
 jalankanGodsHand :-
     urutanAwal(Urutan),
@@ -39,18 +46,19 @@ jalankanGodsHand :-
     asserta(kartuPemain(Penerima,TanganPenerimaBaru)),
     Kartu = kartu(Warna,Jenis),
     write('Tuhan telah berkehendak.'),nl,
-    format('Kartu ~w ~w milik ~w berpindah ke tangan ~w!~n',[Warna,Jenis,Pemberi,Penerima]).
+    format('Kartu ~w ~w milik ~w berpindah ke tangan ~w!~n',[Warna,Jenis,Pemberi,Penerima]),
+    !.
 
-listKosong([]).
+
+semua1Kartu([]).
+semua1Kartu([Pemain|T]) :-
+    kartuPemain(Pemain,Kartu),
+    count_list(Kartu,1),
+    semua1Kartu(T).
 
 listPemberi([],[]).
 listPemberi([Pemain|T],[Pemain|Sisa]) :-
-    kartuPemain(Pemain,Kartu),
-    count_list(Kartu,Jumlah),
-    Jumlah > 1, !,
-    listPemberi(T,Sisa).
-
-listPemberi([_|T],Sisa) :-
+    kartuPemain(Pemain,_),
     listPemberi(T,Sisa).
 
 listPenerima([],_,[]).
@@ -60,12 +68,3 @@ listPenerima([Pemberi|T],Pemberi,Sisa) :- !,
 listPenerima([Pemain|T],Pemberi,[Pemain|Sisa]) :-
     listPenerima(T,Pemberi,Sisa).
     
-tesGodsHandKosong :-
-    urutanAwal([A,B|_]),
-
-    retractall(kartuPemain(A,_)),
-    retractall(kartuPemain(B,_)),
-
-    asserta(kartuPemain(A,[kartu(merah,1)])),
-    asserta(kartuPemain(B,[kartu(biru,2)])).
-
