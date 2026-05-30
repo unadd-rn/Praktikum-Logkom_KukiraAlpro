@@ -7,7 +7,7 @@ loadGame :-
 loadGame :-
     isStart(1), !,
     write('Gagal! Kamu tidak bisa load game saat permainan sedang berjalan!'), nl,
-    write('Selesaikan game terlebih dahulu atau gunakan command endGame.'), nl.
+    write('Selesaikan game terlebih dahulu atau gunakan command exit.'), nl.
 
 eksekusiLoad(File) :-
     file_exists(File), !,
