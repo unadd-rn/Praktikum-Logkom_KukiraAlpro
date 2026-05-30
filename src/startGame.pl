@@ -1,3 +1,14 @@
+ambilPemain(L) :-
+    namaPemain(P), !,
+    retract(namaPemain(P)),
+    ambilPemain(Sisa),
+    L = [P|Sisa].
+ambilPemain([]).
+
+balikinData([]).
+balikinData([P|T]) :-
+    assertz(namaPemain(P)),
+    balikinData(T).
 
 startGame :-
     isStart(0), 
@@ -23,7 +34,8 @@ startGame :-
     asserta(isStart(1)),
     inputJumlah(N),
     inputNama(N, 1, _NamaPemain),
-    findall(X, namaPemain(X), ListPemain),
+    ambilPemain(ListPemain),
+    balikinData(ListPemain),
     
     acakList(ListPemain, UrutanPemain),
     % print(UrutanPemain),
