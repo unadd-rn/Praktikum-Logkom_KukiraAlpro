@@ -262,6 +262,7 @@ ambilKartu :-
     asserta(kartuPemain(Pemain,NewKartu)),
     retractall(isDrawTwo(_)),
     asserta(isDrawTwo(0)),
+    retractall(sudahUni(Pemain)),
     nextTurn.
 ambilKartu :-
     isStart(1),
@@ -278,6 +279,7 @@ ambilKartu :-
     asserta(isDrawFour(0)),
     retractall(bisaNonHitam(_)),
     asserta(bisaNonHitam(0)),
+    retractall(sudahUni(Pemain)),
     nextTurn.
 ambilKartu :-
     isStart(1),
@@ -289,6 +291,7 @@ ambilKartu :-
     retract(kartuPemain(Pemain,_)),
     asserta(kartuPemain(Pemain,List1)),
     format('~w mendapatkan kartu: ~w.~n', [Pemain,Kartu]),
+    retractall(sudahUni(Pemain)),
     nextTurn,
     coba(endGame). 
 

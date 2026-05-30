@@ -7,6 +7,8 @@
 :- include('endGame.pl').
 :- include('saveGame.pl').
 :- include('loadGame.pl').
+:- include('kartuTersembunyi.pl').
+
 
 :- dynamic(namaPemain/1).
 :- dynamic(jumlahPemain/1).
@@ -14,6 +16,7 @@
 :- dynamic(suksesor/2).
 :- dynamic(giliran/1).
 :- dynamic(kartuPemain/2).
+:- dynamic(kartuTersembunyi/2).
 :- dynamic(urutanPemain/1).
 :- dynamic(urutanAwal/1).
 :- dynamic(isStart/1). 

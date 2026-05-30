@@ -40,13 +40,19 @@ lihatKartu :-
     giliran(N),
     kartuPemain(N, K),
     write('kartu kamu:'),nl,
-    cetak(K, 1).
+    cetak(K, 1, N).
 
-cetak([], _).
-cetak([kartu(W,J)|T], N) :-
+cetak([], _, _).
+cetak([kartu(W,J)|T], N, Pemain) :-
+    kartuTersembunyi(Pemain,List),
+    isInList(kartu(W,J),List),!,
+    format("~w. ~w ~w (Tersembunyi)~n", [N, W, J]),
+    N1 is N + 1,
+    cetak(T, N1, Pemain).
+cetak([kartu(W,J)|T], N, Pemain) :-
     format("~w. ~w ~w~n", [N, W, J]),
     N1 is N + 1,
-    cetak(T, N1).
+    cetak(T, N1, Pemain).
 
 cekInfo :-
     topKartu(Atas),
@@ -60,6 +66,9 @@ cekInfo :-
 infoP([]).
 infoP([Nama|T]) :-
     kartuPemain(Nama, K),
-    length(K, Jml),
-    format("~w: ~w kartu~n", [Nama, Jml]),
+    kartuTersembunyi(Nama, S),
+    count_list(K, X),
+    count_list(S, Y),
+    Z is X-Y,
+    format("~w: ~w kartu~n", [Nama, Z]),
     infoP(T).
