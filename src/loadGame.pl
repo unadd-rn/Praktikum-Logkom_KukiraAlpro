@@ -62,7 +62,7 @@ prosesTerm(lastAction:[W-J|_]) :-
     asserta(lastAction(kartu(W, J))).
 prosesTerm(lastActionPemain:none).
 prosesTerm(lastActionPemain:P) :-
-    asserta(lastActionPemain(P)),
+    asserta(lastActionPemain(P)).
 prosesTerm(selisihAction:N) :-
     asserta(selisihAction(N)).
 prosesTerm(isActionAlready:X) :-
