@@ -177,6 +177,21 @@ pemainSebelumnya([_|T], Last):-
 uni(Idx) :-
     isStart(1),
     giliran(Pemain),
+    kartuPemain(Pemain,_),
+    Idx < 1, !,
+    write('Indeks kartu tidak valid!').
+
+uni(Idx) :-
+    isStart(1),
+    giliran(Pemain),
+    kartuPemain(Pemain,List),
+    count_list(List,Jumlah),
+    Idx > Jumlah, !,
+    write('Indeks kartu tidak valid!').
+    
+uni(Idx) :-
+    isStart(1),
+    giliran(Pemain),
     kartuPemain(Pemain,List),
     count_list(List,2),
     chooseCard(Idx,List,Kartu,Sisa),!,
