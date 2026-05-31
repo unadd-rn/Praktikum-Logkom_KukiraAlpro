@@ -78,8 +78,8 @@ tampilkanKartu :-
     kartuTersembunyi(Pemain,T),
     count_list(T,N),
     N is 0,!,
-    write('Tidak ada kartu yang sedang disembunyikan'),
-    nl.
+    write('Tidak ada kartu yang sedang disembunyikan!'),
+    nl,fail.
 tampilkanKartu :-
     isStart(1),
     giliran(Pemain),
