@@ -28,7 +28,7 @@ startGame :-
     retractall(isSkip(_)),
     retractall(isWild(_)),
     retractall(sudahUni(_)),
-    retractall(prevtopKartu()),
+    retractall(prevtopKartu(_)),
     asserta(isDrawFour(0)),
     asserta(isDrawTwo(0)),
     asserta(isReverse(0)),
