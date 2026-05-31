@@ -56,7 +56,7 @@ sembunyikanKartu(_) :-
     fail.
 
 isInList(X,[]) :- fail.
-isInList(X,[X|_]).
+isInList(X,[X|_]) :- !.
 isInList(X,[_|T]) :-
     isInList(X,T).
 
