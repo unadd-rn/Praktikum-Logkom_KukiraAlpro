@@ -14,11 +14,11 @@ hitungPoin([H|T], Total) :-
     Total is N + Rest.
 
 insertUrut(X, [], [X]).
-insertUrut(Poin-Nama, [Poin2-Nama2|T], [Poin-Nama, Poin2-Nama2|T]) :-
+insertUrut(skor(Poin, Nama), [skor(Poin2, Nama2)|T], [skor(Poin, Nama), skor(Poin2, Nama2)|T]) :-
     Poin =< Poin2.
-insertUrut(Poin-Nama, [Poin2-Nama2|T], [Poin2-Nama2|Sisa]) :-
+insertUrut(skor(Poin, Nama), [skor(Poin2, Nama2)|T], [skor(Poin2, Nama2)|Sisa]) :-
     Poin > Poin2,
-    insertUrut(Poin-Nama, T, Sisa).
+    insertUrut(skor(Poin, Nama), T, Sisa).
 
 sorting([],[]).
 sorting([H|T], Bener) :-
@@ -28,13 +28,13 @@ sorting([H|T], Bener) :-
 scoreBoard([], _, []).
 scoreBoard([Pemenang|T], Pemenang, Sisa) :- !,
     scoreBoard(T, Pemenang, Sisa).
-scoreBoard([Nama|T], Pemenang, [Poin-Nama|Sisa]) :-
+scoreBoard([Nama|T], Pemenang, [skor(Poin, Nama)|Sisa]) :-
     kartuPemain(Nama, Kartu),
     hitungPoin(Kartu, Poin),
     scoreBoard(T, Pemenang, Sisa).
 
 cetakScoreboard([], _).
-cetakScoreboard([Poin-Nama|T], Rank) :-
+cetakScoreboard([skor(Poin, Nama)|T], Rank) :-
     format("~w. ~w - ~w poin~n", [Rank, Nama, Poin]),
     Rank1 is Rank + 1,
     cetakScoreboard(T, Rank1).
