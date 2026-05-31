@@ -42,13 +42,18 @@ sembunyikanKartu(Idx) :-
     count_list(List,X),
     count_list(Tersembunyi,Y),
     Z is X-Y,
-    Z>1,!,
+    Z>1,
+    Idx > 0,
+    Idx =< X,!,
     chooseCard(Idx, List, Kartu, Sisa),
     appendList(Tersembunyi,[Kartu],ListBaru),
     retractall(kartuTersembunyi(Pemain,_)),
     asserta(kartuTersembunyi(Pemain,ListBaru)),
     format('Kartu ~w berhasil disembunyian!~n', [Kartu]),
     nextTurn.
+sembunyikanKartu(_) :-
+    write("Indeks tidak valid!"),nl,
+    fail.
 
 isInList(X,[]) :- fail.
 isInList(X,[X|_]).
