@@ -40,6 +40,21 @@ actionWild :-
     inputWarna.
 
 actionMimic :-
+    isActionAlready(1),
+	lastAction(kartu(Warna, Jenis)),
+	Jenis \= wild,
+	Jenis \= wildDrawFour,!,
+    lastActionPemain(Pemain),
+	selisihAction(Selisih),
+	write('Menelusuri riwayat permainan'),
+	nl,
+	format('~nKartu aksi terakhir yang dimainkan: ~w (oleh ~w, ~w giliran lalu)~n', [Jenis, Pemain, Selisih]),
+	format('~nKartu mimic menyalin efek ~w~n', [kartu(Warna,Jenis)]),
+	write('Silakan memilih warna merah/kuning/hijau/biru!'),
+    nl,
+    inputWarna,
+	actionCard(Jenis).
+actionMimic :-
     isActionAlready(1), !,
 	lastAction(kartu(Warna, Jenis)),
     lastActionPemain(Pemain),
