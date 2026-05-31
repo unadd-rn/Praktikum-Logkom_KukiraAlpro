@@ -279,6 +279,10 @@ ambilKartu :-
     retractall(isDrawTwo(_)),
     asserta(isDrawTwo(0)),
     retractall(sudahUni(Pemain)),
+    selisihAction(N),
+    N1 is N+1,
+    retractall(selisihAction(_)),
+    asserta(selisihAction(N1)),
     nextTurn.
 ambilKartu :-
     isStart(1),
@@ -296,6 +300,10 @@ ambilKartu :-
     retractall(bisaNonHitam(_)),
     asserta(bisaNonHitam(0)),
     retractall(sudahUni(Pemain)),
+    selisihAction(N),
+    N1 is N+1,
+    retractall(selisihAction(_)),
+    asserta(selisihAction(N1)),
     nextTurn.
 ambilKartu :-
     isStart(1),
@@ -308,6 +316,10 @@ ambilKartu :-
     asserta(kartuPemain(Pemain,List1)),
     format('~w mendapatkan kartu: ~w.~n', [Pemain,Kartu]),
     retractall(sudahUni(Pemain)),
+    selisihAction(N),
+    N1 is N+1,
+    retractall(selisihAction(_)),
+    asserta(selisihAction(N1)),
     nextTurn,
     coba(endGame). 
 
