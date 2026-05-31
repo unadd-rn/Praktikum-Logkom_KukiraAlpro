@@ -75,6 +75,14 @@ tampilkanKartu :-
 tampilkanKartu :-
     isStart(1),
     giliran(Pemain),
+    kartuTersembunyi(Pemain,T),
+    count_list(T,N),
+    N is 0,!,
+    write('Tidak ada kartu yang sedang disembunyikan'),
+    nl.
+tampilkanKartu :-
+    isStart(1),
+    giliran(Pemain),
     retractall(kartuTersembunyi(Pemain,_)),
     asserta(kartuTersembunyi(Pemain,[])),
     format('Semua kartu tersembunyi ~w berhasil ditampilkan!~n', [Pemain]),
