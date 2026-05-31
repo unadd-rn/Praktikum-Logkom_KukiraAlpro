@@ -52,8 +52,6 @@ actionMimic :-
 actionMimic :- 
     isActionAlready(0),!,
 	lastAction(kartu(Warna, Jenis)),
-    lastActionPemain(Pemain),
-	selisihAction(Selisih),
 	write('Menelusuri riwayat permainan'),
 	nl,
     write('Belum ada riwayat action card'),
