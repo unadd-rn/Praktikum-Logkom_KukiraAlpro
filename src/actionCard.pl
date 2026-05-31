@@ -78,7 +78,10 @@ inputWarna:-
 
 cekActionHelper(Kartu):-
 	retractall(lastAction(_)),
-	asserta(lastAction(Kartu)).
+	asserta(lastAction(Kartu)),
+    giliran(Pemain),
+    retractall(lastActionPemain(_)),
+    asserta(lastActionPemain(Pemain)).
 
 cekAction(kartu(Warna, skip), 0):-
 	!,
