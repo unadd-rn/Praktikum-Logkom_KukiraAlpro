@@ -314,7 +314,11 @@ ambilKartu :-
 exit :-
     isStart(1),!,
     retract(isStart(1)),
-    asserta(isStart(0)).
+    asserta(isStart(0)),
+    write('Permainan dihentikan!').
+exit :-
+    write('Permainan belum dimulai!'),
+    fail.
 
 reverseList([],[]).
 reverseList([H],[H]).
