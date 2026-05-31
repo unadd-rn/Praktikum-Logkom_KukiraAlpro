@@ -39,7 +39,7 @@ saveGame :-
     warna(W),
     arah(A),
     lastAction(Act),
-    ubahKartu(Act,KAct)
+    ubahKartu(Act,KAct),
     
     format(S, "urutanPemain:~w.~n", [U]),
     format(S, "giliran:'~w'.~n", [G]),

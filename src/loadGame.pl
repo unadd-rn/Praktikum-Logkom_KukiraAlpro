@@ -55,7 +55,7 @@ prosesTerm(arahPermainan:A) :-
 prosesTerm(statusUNI:L) :- 
     isiUni(L).
 prosesTerm(lastAction:KAct) :- 
-    setKartu(KAct,Act)
+    setKartu(KAct,Act),
     asserta(lastAction(Act)).
 prosesTerm(discardTop:W-J) :- 
     asserta(topKartu(kartu(W,J))), 
