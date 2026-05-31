@@ -23,6 +23,10 @@ eksekusiLoad(File) :-
     retractall(kartuPemain(_,_)),
     retractall(kartuTersembunyi(_,_)),
     retractall(isStart(_)),
+    retractall(lastAction(_)),
+    retractall(lastActionPemain(_)),
+    retractall(selisihAction(_)),
+    retractall(isActionAlready(_)),
 
     bacaFile(S),
     close(S), !,
@@ -56,6 +60,13 @@ prosesTerm(statusUNI:L) :-
     isiUni(L).
 prosesTerm(lastAction:[W-J|_]) :- 
     asserta(lastAction(kartu(W, J))).
+prosesTerm(lastActionPemain:none).
+prosesTerm(lastActionPemain:P) :-
+    asserta(lastActionPemain(P)),
+prosesTerm(selisihAction:N) :-
+    asserta(selisihAction(N)).
+prosesTerm(isActionAlready:X) :-
+    asserta(isActionAlready(X)).
 prosesTerm(discardTop:W-J) :- 
     asserta(topKartu(kartu(W,J))), 
     asserta(jenis(J)).

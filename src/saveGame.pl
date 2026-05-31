@@ -38,7 +38,7 @@ saveGame :-
     topKartu(Top),
     warna(W),
     arah(A),
-    lastAction(kartu(WAct, JAct)),
+    
     
     format(S, "urutanPemain:~w.~n", [U]),
     format(S, "giliran:'~w'.~n", [G]),
@@ -48,7 +48,6 @@ saveGame :-
     format(S, "arahPermainan:~w.~n", [A]),
     cekUni(U, LUni),
     format(S, "statusUNI:~w.~n", [LUni]),
-    format(S, "lastAction:[~w-~w].~n", [WAct, JAct]),
     
     tulisKartu(S, U),
     
@@ -72,3 +71,20 @@ tulisKartuTersembunyi(S,P) :-
 tulisKartuTersembunyi(S,P) :-
     ubahKartu([], Teks),
     format(S, "kartuTersembunyi('~w'):~w.~n", [P, Teks]).
+
+tulisLastAction(S) :-
+    isActionAlready(1),!,
+    lastAction(kartu(W, J)),
+    lastActionPemain(Pemain),
+    selisihAction(N),
+    format(S, "lastAction:[~w-~w].~n", [W, J]),
+    format(S, "lastActionPemain:'~w'.~n", [Pemain]),
+    format(S, "selisihAction:~w.~n", [N]),
+    format(S, "isActionAlready:1.~n", []).
+tulisLastAction(S) :-
+    isActionAlready(0),!,
+    lastAction(kartu(W, J)),
+    format(S, "lastAction:[~w-~w].~n", [W, J]),
+    format(S, "lastActionPemain:none.~n", []),
+    format(S, "selisihAction:0.~n", []),
+    format(S, "isActionAlready:0.~n", []).
