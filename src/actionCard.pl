@@ -71,51 +71,46 @@ cekActionHelper(Kartu):-
 	retractall(lastAction(_)),
 	asserta(lastAction(Kartu)).
 
-cekAction(kartu(Warna, Jenis), 0):-
-	kartu(_, skip),
+cekAction(kartu(Warna, skip), 0):-
 	!,
 	retractall(isActionAlready(_)),
 	asserta(isActionAlready(1)),
 	Num is 0,
 	retractall(selisihAction(_)),
 	asserta(selisihAction(Num)),
-	cekActionHelper(kartu(Warna, Jenis)).
-cekAction(kartu(Warna, Jenis), 0):-
-	kartu(_, reverse),
+	cekActionHelper(kartu(Warna, skip)).
+cekAction(kartu(Warna, reverse), 0):-
 	!,
 	retractall(isActionAlready(_)),
 	asserta(isActionAlready(1)),
 	Num is 0,
 	retractall(selisihAction(_)),
 	asserta(selisihAction(Num)),
-	cekActionHelper(kartu(Warna, Jenis)).
-cekAction(kartu(Warna, Jenis), 0):-
-	kartu(_, drawTwo),
+	cekActionHelper(kartu(Warna, reverse)).
+cekAction(kartu(Warna, drawTwo), 0):-
 	!,
 	retractall(isActionAlready(_)),
 	asserta(isActionAlready(1)),
 	Num is 0,
 	retractall(selisihAction(_)),
 	asserta(selisihAction(Num)),
-	cekActionHelper(kartu(Warna, Jenis)).
-cekAction(kartu(Warna, Jenis), 0):-
-	kartu(_, wild),
+	cekActionHelper(kartu(Warna, drawTwo)).
+cekAction(kartu(hitam, wild), 0):-
 	!,
 	retractall(isActionAlready(_)),
 	asserta(isActionAlready(1)),
 	Num is 0,
 	retractall(selisihAction(_)),
 	asserta(selisihAction(Num)),
-	cekActionHelper(kartu(Warna, Jenis)).
-cekAction(kartu(Warna, Jenis), 0):-
-	kartu(_, wildDrawFour),
+	cekActionHelper(kartu(hitam, wild)).
+cekAction(kartu(hitam, wildDrawFour), 0):-
 	!,
 	retractall(isActionAlready(_)),
 	asserta(isActionAlready(1)),
 	Num is 0,
 	retractall(selisihAction(_)),
 	asserta(selisihAction(Num)),
-	cekActionHelper(kartu(Warna, Jenis)).
+	cekActionHelper(kartu(hitam, wildDrawFour)).
 cekAction(kartu(Warna, Jenis), Num):-
 	isActionAlready(1),
 	!,
