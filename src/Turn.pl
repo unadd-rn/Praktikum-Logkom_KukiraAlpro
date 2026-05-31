@@ -322,7 +322,7 @@ ambilKartu :-
     retractall(selisihAction(_)),
     asserta(selisihAction(N1)),
     nextTurn,
-    coba(endGame). 
+    coba(endGame),!. 
 
 exit :-
     isStart(1),!,
