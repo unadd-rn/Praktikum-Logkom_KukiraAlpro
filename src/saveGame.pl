@@ -48,6 +48,8 @@ saveGame :-
     format(S, "arahPermainan:~w.~n", [A]),
     cekUni(U, LUni),
     format(S, "statusUNI:~w.~n", [LUni]),
+
+    tulisLastAction(S),
     
     tulisKartu(S, U),
     
