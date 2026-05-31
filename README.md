@@ -4,6 +4,29 @@ Praktikum ini mengembangkan Game UNI berbasis terminal yang menyediakan beberapa
 
 Program diimplementasikan dengan prolog dan memanfaatkan berbagai implementasi Prolog seperti rekurens, list, cut, fail, loop, dan file processing.
 
+## Struktur Repositori
+
+```text
+.
+├── docs/
+│   ├── Milestone 1 _G18.pdf
+│   └── Milestone2_G18.pdf
+├── src/
+│   ├── actionCard.pl
+│   ├── aksiPendukung.pl
+│   ├── endGame.pl
+│   ├── godsHand.pl
+│   ├── Kartu.pl
+│   ├── kartuTersembunyi.pl
+│   ├── loadGame.pl
+│   ├── main.pl
+│   ├── randomCard.pl
+│   ├── saveGame.pl
+│   ├── startGame.pl
+│   └── Turn.pl
+└── README.md
+```
+
 ## How to Play!
 
 ### Aturan Dasar
