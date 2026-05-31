@@ -51,7 +51,7 @@ actionMimic :-
 	actionCard(Jenis).
 actionMimic :- 
     isActionAlready(0),!,
-	lastAction(kartu(Warna, Jenis)),
+	lastAction(kartu(_, Jenis)),
 	write('Menelusuri riwayat permainan'),
 	nl,
     write('Belum ada riwayat action card'),
@@ -123,14 +123,14 @@ cekAction(kartu(hitam, wildDrawFour), 0):-
 	retractall(selisihAction(_)),
 	asserta(selisihAction(Num)),
 	cekActionHelper(kartu(hitam, wildDrawFour)).
-cekAction(kartu(Warna, Jenis), Num):-
+cekAction(kartu(_, _), Num):-
 	isActionAlready(1),
 	!,
 	selisihAction(Prev),
 	Num is Prev + 1,
 	retractall(selisihAction(_)),
 	asserta(selisihAction(Num)).
-cekAction(kartu(Warna, Jenis), 1):-
+cekAction(kartu(_, _), 1):-
 	isActionAlready(0),
 	!,
 	Num is 1,

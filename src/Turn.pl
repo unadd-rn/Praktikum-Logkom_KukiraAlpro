@@ -87,7 +87,7 @@ mainkanKartu(Idx) :-
     isStart(1),
     giliran(Pemain),
     kartuPemain(Pemain,List),
-    topKartu(Top),
+    topKartu(_Top),
     chooseCard(Idx, List, Kartu, Sisa),!,
     validasiTop(Kartu),
     retract(kartuPemain(Pemain,_)),
@@ -100,7 +100,7 @@ mainkanKartu(Idx) :-
     asserta(warna(Warna)),
     retractall(jenis(_)),
     asserta(jenis(Jenis)),
-    cekAction(Kartu,Num),
+    cekAction(Kartu,_Num),
     actionCard(Jenis),
     nextTurn, 
     coba(endGame).
@@ -130,7 +130,7 @@ tantang :-
 tantang:-
     isStart(1),
     bisaNonHitam(1),!, %gak boleh, pemain sebelumnya kena 4
-    giliran(Pemain),
+    giliran(_Pemain),
     urutanPemain(T),
     pemainSebelumnya(T, PemainSebelumnya),
     write('Tantangan dilakukan!'), nl,

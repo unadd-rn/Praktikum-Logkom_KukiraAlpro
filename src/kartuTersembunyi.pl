@@ -1,16 +1,16 @@
-sembunyikanKartu(Idx) :-
+sembunyikanKartu(_) :-
     isStart(0),!,
     write('Permainan belum dimulai!'),
     fail.
-sembunyikanKartu(Idx) :-
+sembunyikanKartu(_) :-
     isDrawTwo(1),!,
     write('Kamu tidak bisa menyembunyikan kartu pada giliran ini. Silakan ambil kartu!'),nl,
     fail.
-sembunyikanKartu(Idx) :-
+sembunyikanKartu(_) :-
     isDrawFour(1),!,
     write('Kamu tidak bisa menyembunyikan kartu pada giliran ini. Silakan ambil kartu!'),nl,
     fail.
-sembunyikanKartu(Idx) :-
+sembunyikanKartu(_) :-
     isStart(1),
     giliran(Pemain),
     kartuPemain(Pemain,List),
@@ -30,7 +30,7 @@ sembunyikanKartu(Idx) :-
     count_list(Tersembunyi,Y),
     Z is X-Y,
     Z>1,
-    chooseCard(Idx, List, Kartu, Sisa),
+    chooseCard(Idx, List, Kartu, _Sisa),
     isInList(Kartu,Tersembunyi),!,
     format('Kartu ~w sudah disembunyian!~n', [Kartu]),
     fail.
@@ -45,7 +45,7 @@ sembunyikanKartu(Idx) :-
     Z>1,
     Idx > 0,
     Idx =< X,!,
-    chooseCard(Idx, List, Kartu, Sisa),
+    chooseCard(Idx, List, Kartu, _Sisa),
     appendList(Tersembunyi,[Kartu],ListBaru),
     retractall(kartuTersembunyi(Pemain,_)),
     asserta(kartuTersembunyi(Pemain,ListBaru)),
@@ -55,7 +55,7 @@ sembunyikanKartu(_) :-
     write('Indeks tidak valid!'),nl,
     fail.
 
-isInList(X,[]) :- fail.
+isInList(_,[]) :- fail.
 isInList(X,[X|_]) :- !.
 isInList(X,[_|T]) :-
     isInList(X,T).

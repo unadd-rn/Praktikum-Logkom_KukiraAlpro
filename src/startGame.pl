@@ -150,5 +150,5 @@ topCard:-
 topCard:-
     topCard.
 
-jalanPertama([H|T],H).
+jalanPertama([H|_],H).
     
