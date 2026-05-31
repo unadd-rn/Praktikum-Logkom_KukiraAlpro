@@ -76,7 +76,7 @@ actionMimic :-
 actionDrawFour :-
     giliran(Pemain),
     kartuPemain(Pemain,Kartu),
-    topKartu(Top),
+    prevtopKartu(Top),
     validasiListNonHitam(Kartu,Top),
     write('Silakan memilih warna merah/kuning/hijau/biru!'),
     nl,

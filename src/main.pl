@@ -13,6 +13,7 @@
 :- dynamic(namaPemain/1).
 :- dynamic(jumlahPemain/1).
 :- dynamic(topKartu/1).
+:- dynamic(prevtopKartu/1).
 :- dynamic(suksesor/2).
 :- dynamic(giliran/1).
 :- dynamic(kartuPemain/2).
