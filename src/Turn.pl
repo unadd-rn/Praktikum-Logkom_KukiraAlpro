@@ -50,17 +50,7 @@ nextTurn:-
     asserta(isSkip(0)),
     nextTurn.
 nextTurn:-
-    isReverse(0),!,
-    urutanPemain([H|T]),
-    appendList(T,[H], UrtanBaru),
-    retractall(urutanPemain(_)),
-    asserta(urutanPemain(UrtanBaru)),
-    UrtanBaru = [NextPemain|_],
-    retractall(giliran(_)),
-    asserta(giliran(NextPemain)),
-    format('~nGiliran ~w.~n', [NextPemain]).
-nextTurn:-
-    isReverse(1),
+    isReverse(1),!,
     urutanPemain([H|T]),
     appendList(T,[H], UrtanBaru),
     reverseList(UrtanBaru,UrutanReverse),
@@ -69,6 +59,17 @@ nextTurn:-
     retractall(isReverse(_)),
     asserta(isReverse(0)),
     nextTurn.
+nextTurn:-
+    isReverse(0),
+    urutanPemain([H|T]),
+    appendList(T,[H], UrtanBaru),
+    retractall(urutanPemain(_)),
+    asserta(urutanPemain(UrtanBaru)),
+    UrtanBaru = [NextPemain|_],
+    retractall(giliran(_)),
+    asserta(giliran(NextPemain)),
+    format('~nGiliran ~w.~n', [NextPemain]),!.
+
 
 /* Mekanisme mainkanKartu */
 mainkanKartu(_) :-
@@ -88,7 +89,7 @@ mainkanKartu(Idx) :-
     giliran(Pemain),
     kartuPemain(Pemain,List),
     topKartu(_Top),
-    chooseCard(Idx, List, Kartu, Sisa),!,
+    chooseCard(Idx, List, Kartu, Sisa),
     validasiTop(Kartu),
     retract(kartuPemain(Pemain,_)),
     asserta(kartuPemain(Pemain, Sisa)),
@@ -103,7 +104,7 @@ mainkanKartu(Idx) :-
     cekAction(Kartu,_Num),
     actionCard(Jenis),
     nextTurn, 
-    coba(endGame).
+    coba(endGame),!.
 mainkanKartu(_) :-
     isStart(1),
     write('Index tidak valid!'),
