@@ -11,6 +11,7 @@ Program diimplementasikan dengan prolog dan memanfaatkan berbagai implementasi P
 ├── docs/
 │   ├── Milestone 1 _G18.pdf
 │   └── Milestone2_G18.pdf
+│   └── Laporan_G18.pdf
 ├── src/
 │   ├── actionCard.pl
 │   ├── aksiPendukung.pl
