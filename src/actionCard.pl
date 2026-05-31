@@ -46,7 +46,7 @@ actionMimic:-
 	write('Menelusuri riwayat permainan'),
 	nl,
 	format('~nKartu aksi terakhir yang dimainkan: ~w (oleh ~w, ~w giliran lalu)~n', [kartu(Warna, Jenis), Pemain, Selisih]),
-	format('~nKartu mimic menyalin efek ~w~n', LastActionCard),
+	format('~nKartu mimic menyalin efek ~w~n', [kartu(Warna,Jenis)]),
 	actionCard(Jenis).
 
 actionDrawFour :-
@@ -99,15 +99,6 @@ cekAction(kartu(Warna, Jenis), 0):-
 	asserta(selisihAction(Num)),
 	cekActionHelper(kartu(Warna, Jenis)).
 cekAction(kartu(Warna, Jenis), 0):-
-	kartu(_, reverse),
-	!,
-	retractall(isActionAlready(_)),
-	asserta(isActionAlready(1)),
-	Num is 0,
-	retractall(selisihAction(_)),
-	asserta(selisihAction(Num)),
-	cekActionHelper(kartu(Warna, Jenis)).
-cekAction(kartu(Warna, Jenis), 0):-
 	kartu(_, wild),
 	!,
 	retractall(isActionAlready(_)),
@@ -131,12 +122,10 @@ cekAction(kartu(Warna, Jenis), Num):-
 	selisihAction(Prev),
 	Num is Prev + 1,
 	retractall(selisihAction(_)),
-	asserta(selisihAction(Num)),
-	cekActionHelper(kartu(Warna, Jenis)).
+	asserta(selisihAction(Num)).
 cekAction(kartu(Warna, Jenis), 1):-
 	isActionAlready(0),
 	!,
 	Num is 1,
 	retractall(selisihAction(_)),
-	asserta(selisihAction(Num)),
-	cekActionHelper(kartu(Warna, Jenis)).
+	asserta(selisihAction(Num)).

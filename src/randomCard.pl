@@ -1,6 +1,6 @@
 
 randomKartu(Deck, Kartu) :-
-    random(0, 54, Idx),
+    random(0, 55, Idx),
     getElmt(Deck, Idx, Kartu).
 
 getElmt([H|_], 0, H) :- !.
