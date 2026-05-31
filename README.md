@@ -65,7 +65,7 @@ Dan untuk memuat game lagi jalankan:
 
 | Nama | NIM | Tugas |
 |------|-----|-------|
-| Pasaribu Fritz T.A.M | 13525105 | mekanismeturn, actionCard, kartu tersembunyi, integrasi total |
+| Pasaribu Fritz T.A.M | 13525105 | mekanisme turn, actionCard, kartu tersembunyi, integrasi total |
 | Gede Pranajayanta S. | 13525099 | startGame, wildDrawFour, tantang, mimic |
 | Edbert Fernando | 13525111 | Deck, pembagian kartu, uni, tangkap, god's hand |
 | Nadia Aulia Syafarani | 13525122 | aksiPendukung, endGame, save & load game |
