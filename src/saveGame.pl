@@ -38,6 +38,7 @@ saveGame :-
     topKartu(Top),
     warna(W),
     arah(A),
+    lastAction(Act),
     
     format(S, "urutanPemain:~w.~n", [U]),
     format(S, "giliran:'~w'.~n", [G]),
@@ -47,6 +48,7 @@ saveGame :-
     format(S, "arahPermainan:~w.~n", [A]),
     cekUni(U, LUni),
     format(S, "statusUNI:~w.~n", [LUni]),
+    format(S, "lastAction:~w.~n" [Act]),
     
     tulisKartu(S, U),
     

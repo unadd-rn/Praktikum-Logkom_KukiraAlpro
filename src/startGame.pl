@@ -33,6 +33,7 @@ startGame :-
     asserta(isReverse(0)),
     asserta(isSkip(0)),
     asserta(isStart(1)),
+    asserta(lastAction(wild)),
     inputJumlah(N),
     inputNama(N, 1, _NamaPemain),
     ambilPemain(ListPemain),

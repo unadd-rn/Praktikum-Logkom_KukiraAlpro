@@ -54,6 +54,8 @@ prosesTerm(arahPermainan:A) :-
     asserta(arah(A)).
 prosesTerm(statusUNI:L) :- 
     isiUni(L).
+prosesTerm(lastAction:Act) :- 
+    asserta(lastAction(Act)).
 prosesTerm(discardTop:W-J) :- 
     asserta(topKartu(kartu(W,J))), 
     asserta(jenis(J)).
