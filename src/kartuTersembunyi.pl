@@ -52,7 +52,7 @@ sembunyikanKartu(Idx) :-
     format('Kartu ~w berhasil disembunyian!~n', [Kartu]),
     nextTurn.
 sembunyikanKartu(_) :-
-    write("Indeks tidak valid!"),nl,
+    write('Indeks tidak valid!'),nl,
     fail.
 
 isInList(X,[]) :- fail.
