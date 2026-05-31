@@ -67,6 +67,9 @@ kartu(hitam,wild).
 /*kartu wild draw four*/
 kartu(hitam,wildDrawFour).
 
+/*kartu mimic*/
+kartu(hitam, mimic).
+
 /*Deck*/
 deck([
     kartu(merah,0), kartu(merah,1), kartu(merah,2), kartu(merah,3), kartu(merah,4),
@@ -80,5 +83,5 @@ deck([
     kartu(merah,skip), kartu(kuning,skip), kartu(hijau,skip), kartu(biru,skip),
     kartu(merah,reverse), kartu(kuning,reverse), kartu(hijau,reverse), kartu(biru,reverse),
     kartu(merah,drawTwo), kartu(kuning,drawTwo), kartu(hijau,drawTwo), kartu(biru,drawTwo),
-    kartu(hitam,wild), kartu(hitam,wildDrawFour)
+    kartu(hitam,wild), kartu(hitam,wildDrawFour), kartu(hitam,mimic)
 ]).

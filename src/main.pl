@@ -30,8 +30,14 @@
 :- dynamic(warna/1).
 :- dynamic(jenis/1).
 :- dynamic(sudahUni/1).
+:- dynamic(lastAction/1).
+:- dynamic(isActionAlready/1).
+:- dynamic(selisihAction/1).
+:- dynamic(lastActionPemain/1).
 
 isStart(0).
+isActionAlready(0).
+selisihAction(0).
 isSkip(0).
 isReverse(0).
 isWild(0).

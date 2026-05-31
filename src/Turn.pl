@@ -100,6 +100,7 @@ mainkanKartu(Idx) :-
     asserta(warna(Warna)),
     retractall(jenis(_)),
     asserta(jenis(Jenis)),
+    cekAction(Kartu,Num),
     actionCard(Jenis),
     nextTurn, 
     coba(endGame).
@@ -305,3 +306,4 @@ reverseList([H],[H]).
 reverseList([H|T],NewList) :-
     reverseList(T,L1),
     appendList(L1,[H],NewList).
+
